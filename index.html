@@ -36,6 +36,34 @@
             </div>
         </section>
 
+        <!-- Countdown Section -->
+        <section class="countdown-section">
+            <div class="countdown-container">
+                <h2 class="countdown-title">Đếm ngược đến ngày trọng đại</h2>
+                <div class="countdown-timer">
+                    <div class="time-unit">
+                        <span class="time-number" id="days">00</span>
+                        <span class="time-label">Ngày</span>
+                    </div>
+                    <div class="time-unit">
+                        <span class="time-number" id="hours">00</span>
+                        <span class="time-label">Giờ</span>
+                    </div>
+                    <div class="time-unit">
+                        <span class="time-number" id="minutes">00</span>
+                        <span class="time-label">Phút</span>
+                    </div>
+                    <div class="time-unit">
+                        <span class="time-number" id="seconds">00</span>
+                        <span class="time-label">Giây</span>
+                    </div>
+                </div>
+                <div class="countdown-message">
+                    <p>Chúng tôi rất mong được chia sẻ niềm hạnh phúc này cùng bạn!</p>
+                </div>
+            </div>
+        </section>
+
         <!-- Wedding Details Section -->
         <section class="wedding-details">
             <div class="formal-invitation">
@@ -84,6 +112,161 @@
                     <div class="venue-info">
                         <h3>TẠI: JW MARIOTT HOTEL & SUITES SAIGON</h3>
                         <p class="address">Nút Giao Hai Bà Trưng Và Lê Duẩn, Phường Bến Nghé, Quận 1</p>
+                        
+                        <!-- Map Section -->
+                        <div class="map-section">
+                            <h4>Bản đồ địa điểm</h4>
+                            <div class="map-container">
+                                <div id="weddingMap" class="map-placeholder">
+                                    <div class="map-overlay">
+                                        <div class="map-pin">📍</div>
+                                        <div class="map-info">
+                                            <h5>JW Mariott Hotel & Suites Saigon</h5>
+                                            <p>Nút Giao Hai Bà Trưng Và Lê Duẩn<br>Phường Bến Nghé, Quận 1, TP.HCM</p>
+                                        </div>
+                                    </div>
+                                    <div class="map-background"></div>
+                                </div>
+                                
+                                <div class="map-actions">
+                                    <button class="map-btn" onclick="openGoogleMaps()">
+                                        <span>🗺️</span> Mở Google Maps
+                                    </button>
+                                    <button class="map-btn" onclick="getDirections()">
+                                        <span>🧭</span> Chỉ đường
+                                    </button>
+                                    <button class="map-btn" onclick="shareLocation()">
+                                        <span>📍</span> Chia sẻ vị trí
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Additional Info -->
+                            <div class="venue-details">
+                                <div class="detail-item">
+                                    <span class="detail-icon">🚗</span>
+                                    <div class="detail-content">
+                                        <h6>Đỗ xe</h6>
+                                        <p>Có bãi đỗ xe miễn phí cho khách mời</p>
+                                    </div>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-icon">🚌</span>
+                                    <div class="detail-content">
+                                        <h6>Phương tiện công cộng</h6>
+                                        <p>Ga Metro Bến Thành cách 500m</p>
+                                    </div>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-icon">📞</span>
+                                    <div class="detail-content">
+                                        <h6>Liên hệ khách sạn</h6>
+                                        <p>+84 28 3822 9999</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Photo Gallery Section -->
+        <section class="gallery-section">
+            <div class="gallery-container">
+                <h2 class="gallery-title">Khoảnh khắc đẹp</h2>
+                <p class="gallery-subtitle">Những hình ảnh đáng nhớ trong hành trình tình yêu của chúng tôi</p>
+                
+                <!-- Main Slideshow -->
+                <div class="slideshow-container">
+                    <div class="slide active">
+                        <img src="PNG/main.jpeg" alt="Ảnh cưới chính" class="slide-image">
+                        <div class="slide-caption">
+                            <h3>Ngày trọng đại</h3>
+                            <p>Khoảnh khắc hạnh phúc nhất của chúng tôi</p>
+                        </div>
+                    </div>
+                    
+                    <div class="slide">
+                        <img src="PNG/3E012091-8813-46C1-B83D-9B22070C7DBA_1_105_c.jpeg" alt="Monogram" class="slide-image">
+                        <div class="slide-caption">
+                            <h3>K ♥ N</h3>
+                            <p>Monogram đặc biệt của chúng tôi</p>
+                        </div>
+                    </div>
+                    
+                    <div class="slide">
+                        <img src="PNG/8F82AA49-34D7-4083-BAB0-DF5A48E8862C.jpeg" alt="Timeline cưới" class="slide-image">
+                        <div class="slide-caption">
+                            <h3>Lịch trình đám cưới</h3>
+                            <p>Từng khoảnh khắc trong ngày cưới</p>
+                        </div>
+                    </div>
+                    
+                    <div class="slide">
+                        <img src="PNG/C173D807-05A3-4F9C-A7E8-80F7887D5512.jpeg" alt="Thiệp mời" class="slide-image">
+                        <div class="slide-caption">
+                            <h3>Thiệp mời chính thức</h3>
+                            <p>Lời mời trân trọng đến gia đình và bạn bè</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Navigation arrows -->
+                    <button class="slide-nav prev" onclick="changeSlide(-1)">❮</button>
+                    <button class="slide-nav next" onclick="changeSlide(1)">❯</button>
+                    
+                    <!-- Slide indicators -->
+                    <div class="slide-indicators">
+                        <span class="indicator active" onclick="currentSlide(1)"></span>
+                        <span class="indicator" onclick="currentSlide(2)"></span>
+                        <span class="indicator" onclick="currentSlide(3)"></span>
+                        <span class="indicator" onclick="currentSlide(4)"></span>
+                    </div>
+                </div>
+                
+                <!-- Thumbnail Gallery -->
+                <div class="thumbnail-gallery">
+                    <h3>Album ảnh</h3>
+                    <div class="thumbnails">
+                        <div class="thumbnail active" onclick="currentSlide(1)">
+                            <img src="PNG/main.jpeg" alt="Thumbnail 1">
+                            <div class="thumbnail-overlay">
+                                <span>Ảnh cưới</span>
+                            </div>
+                        </div>
+                        <div class="thumbnail" onclick="currentSlide(2)">
+                            <img src="PNG/3E012091-8813-46C1-B83D-9B22070C7DBA_1_105_c.jpeg" alt="Thumbnail 2">
+                            <div class="thumbnail-overlay">
+                                <span>Monogram</span>
+                            </div>
+                        </div>
+                        <div class="thumbnail" onclick="currentSlide(3)">
+                            <img src="PNG/8F82AA49-34D7-4083-BAB0-DF5A48E8862C.jpeg" alt="Thumbnail 3">
+                            <div class="thumbnail-overlay">
+                                <span>Timeline</span>
+                            </div>
+                        </div>
+                        <div class="thumbnail" onclick="currentSlide(4)">
+                            <img src="PNG/C173D807-05A3-4F9C-A7E8-80F7887D5512.jpeg" alt="Thumbnail 4">
+                            <div class="thumbnail-overlay">
+                                <span>Thiệp mời</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Auto-play controls -->
+                <div class="gallery-controls">
+                    <button class="control-btn" id="playPauseBtn" onclick="toggleAutoplay()">
+                        <span id="playIcon">⏸️</span> Tạm dừng
+                    </button>
+                    <div class="speed-control">
+                        <label>Tốc độ: </label>
+                        <select id="speedSelect" onchange="changeSpeed()">
+                            <option value="5000">Chậm (5s)</option>
+                            <option value="3000" selected>Bình thường (3s)</option>
+                            <option value="1500">Nhanh (1.5s)</option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -144,6 +327,254 @@
             </div>
         </section>
 
+        <!-- RSVP Section -->
+        <section class="rsvp-section">
+            <div class="rsvp-container">
+                <h2 class="rsvp-title">Xác nhận tham dự</h2>
+                <p class="rsvp-subtitle">Vui lòng cho chúng tôi biết bạn có thể tham dự không</p>
+                
+                <form class="rsvp-form" id="rsvpForm">
+                    <div class="form-group">
+                        <label for="guestName">Họ và tên *</label>
+                        <input type="text" id="guestName" name="guestName" required placeholder="Nhập họ tên của bạn">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="guestEmail">Email *</label>
+                        <input type="email" id="guestEmail" name="guestEmail" required placeholder="email@example.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="guestPhone">Số điện thoại</label>
+                        <input type="tel" id="guestPhone" name="guestPhone" placeholder="0123 456 789">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="attendance-label">Bạn có thể tham dự không? *</label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="attendYes" name="attendance" value="yes" required>
+                                <label for="attendYes" class="radio-label">
+                                    <span class="radio-custom"></span>
+                                    Có, tôi sẽ tham dự 💒
+                                </label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="attendNo" name="attendance" value="no" required>
+                                <label for="attendNo" class="radio-label">
+                                    <span class="radio-custom"></span>
+                                    Không, tôi không thể tham dự 😢
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group" id="guestCountGroup" style="display: none;">
+                        <label for="guestCount">Số người tham dự (bao gồm bạn)</label>
+                        <select id="guestCount" name="guestCount">
+                            <option value="1">1 người</option>
+                            <option value="2">2 người</option>
+                            <option value="3">3 người</option>
+                            <option value="4">4 người</option>
+                            <option value="5">5+ người</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group" id="mealPreferenceGroup" style="display: none;">
+                        <label class="meal-label">Lựa chọn món ăn *</label>
+                        <div class="meal-options">
+                            <div class="meal-option">
+                                <input type="radio" id="mealMeat" name="mealPreference" value="meat" required>
+                                <label for="mealMeat" class="meal-label-option">
+                                    <div class="meal-card">
+                                        <span class="meal-icon">🥩</span>
+                                        <span class="meal-name">Thịt</span>
+                                        <span class="meal-desc">Bò/Heo/Gà</span>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="meal-option">
+                                <input type="radio" id="mealSeafood" name="mealPreference" value="seafood" required>
+                                <label for="mealSeafood" class="meal-label-option">
+                                    <div class="meal-card">
+                                        <span class="meal-icon">🦐</span>
+                                        <span class="meal-name">Hải sản</span>
+                                        <span class="meal-desc">Tôm/Cua/Cá</span>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="meal-option">
+                                <input type="radio" id="mealVegetarian" name="mealPreference" value="vegetarian" required>
+                                <label for="mealVegetarian" class="meal-label-option">
+                                    <div class="meal-card">
+                                        <span class="meal-icon">🥬</span>
+                                        <span class="meal-name">Chay</span>
+                                        <span class="meal-desc">Không thịt/cá</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="specialRequests">Yêu cầu đặc biệt</label>
+                        <textarea id="specialRequests" name="specialRequests" rows="4" placeholder="Dị ứng thực phẩm, yêu cầu đặc biệt khác..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Lời chúc cho cô dâu chú rể</label>
+                        <textarea id="message" name="message" rows="4" placeholder="Gửi lời chúc tốt đẹp đến Minh Nguyệt & Anh Khoa..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="rsvp-submit-btn">
+                        <span class="btn-text">Gửi xác nhận</span>
+                        <span class="btn-icon">💌</span>
+                    </button>
+                </form>
+                
+                <div class="rsvp-success" id="rsvpSuccess" style="display: none;">
+                    <div class="success-icon">✅</div>
+                    <h3>Cảm ơn bạn!</h3>
+                    <p>Xác nhận tham dự của bạn đã được ghi nhận. Chúng tôi rất mong được gặp bạn trong ngày trọng đại!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Weather Widget Section -->
+        <section class="weather-section">
+            <div class="weather-container">
+                <h2 class="weather-title">Thời tiết ngày cưới</h2>
+                <p class="weather-subtitle">Dự báo thời tiết cho ngày 27 tháng 7, 2025</p>
+                
+                <div class="weather-widget" id="weatherWidget">
+                    <div class="weather-main">
+                        <div class="weather-icon">
+                            <span id="weatherEmoji">☀️</span>
+                        </div>
+                        <div class="weather-info">
+                            <div class="temperature">
+                                <span id="currentTemp">28</span>°C
+                            </div>
+                            <div class="weather-desc" id="weatherDesc">Nắng đẹp</div>
+                            <div class="location">
+                                <span>📍</span> TP. Hồ Chí Minh
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="weather-details">
+                        <div class="detail-row">
+                            <div class="weather-detail">
+                                <span class="detail-icon">🌡️</span>
+                                <div class="detail-text">
+                                    <span class="detail-label">Nhiệt độ</span>
+                                    <span class="detail-value" id="tempRange">25°C - 32°C</span>
+                                </div>
+                            </div>
+                            <div class="weather-detail">
+                                <span class="detail-icon">💧</span>
+                                <div class="detail-text">
+                                    <span class="detail-label">Độ ẩm</span>
+                                    <span class="detail-value" id="humidity">65%</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-row">
+                            <div class="weather-detail">
+                                <span class="detail-icon">🌬️</span>
+                                <div class="detail-text">
+                                    <span class="detail-label">Gió</span>
+                                    <span class="detail-value" id="windSpeed">15 km/h</span>
+                                </div>
+                            </div>
+                            <div class="weather-detail">
+                                <span class="detail-icon">🌧️</span>
+                                <div class="detail-text">
+                                    <span class="detail-label">Mưa</span>
+                                    <span class="detail-value" id="rainChance">20%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="weather-advice">
+                        <div class="advice-icon">💡</div>
+                        <div class="advice-content">
+                            <h6>Gợi ý trang phục</h6>
+                            <p id="clothingAdvice">Thời tiết đẹp, phù hợp với trang phục lịch sự. Nên mang theo áo khoác nhẹ cho buổi tối.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="weather-hourly">
+                    <h4>Dự báo theo giờ</h4>
+                    <div class="hourly-forecast">
+                        <div class="hourly-item">
+                            <div class="hour">17:00</div>
+                            <div class="hour-icon">☀️</div>
+                            <div class="hour-temp">29°C</div>
+                        </div>
+                        <div class="hourly-item">
+                            <div class="hour">18:00</div>
+                            <div class="hour-icon">🌤️</div>
+                            <div class="hour-temp">28°C</div>
+                        </div>
+                        <div class="hourly-item">
+                            <div class="hour">19:00</div>
+                            <div class="hour-icon">🌅</div>
+                            <div class="hour-temp">27°C</div>
+                        </div>
+                        <div class="hourly-item">
+                            <div class="hour">20:00</div>
+                            <div class="hour-icon">🌙</div>
+                            <div class="hour-temp">26°C</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="weather-note">
+                    <p>⚠️ Dự báo có thể thay đổi. Vui lòng kiểm tra thời tiết gần ngày cưới.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- QR Code Section -->
+        <section class="qr-section">
+            <div class="qr-container">
+                <h2 class="qr-title">Chia sẻ thiệp cưới</h2>
+                <p class="qr-subtitle">Quét mã QR để chia sẻ thiệp cưới với bạn bè</p>
+                
+                <div class="qr-card">
+                    <div class="qr-code-container">
+                        <canvas id="qrcode" width="200" height="200"></canvas>
+                        <div class="qr-overlay">
+                            <span class="qr-heart">💕</span>
+                        </div>
+                    </div>
+                    
+                    <div class="qr-info">
+                        <p class="qr-url" id="currentUrl">Loading...</p>
+                        <div class="qr-actions">
+                            <button class="qr-btn" id="copyUrlBtn">
+                                <span>📋</span> Copy Link
+                            </button>
+                            <button class="qr-btn" id="shareBtn">
+                                <span>📤</span> Share
+                            </button>
+                            <button class="qr-btn" id="downloadQrBtn">
+                                <span>💾</span> Tải QR
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="share-message">
+                    <p>💌 Gửi link này cho bạn bè để họ có thể xem thiệp cưới online</p>
+                </div>
+            </div>
+        </section>
+
         <!-- Footer -->
         <footer class="invitation-footer">
             <div class="thank-you">
@@ -155,6 +586,40 @@
             </div>
         </footer>
     </div>
+
+    <!-- Background Music Player -->
+    <div class="music-player" id="musicPlayer">
+        <div class="music-controls">
+            <button class="music-btn" id="musicToggle">
+                <span class="music-icon">🎵</span>
+                <span class="music-text">Nhạc nền</span>
+            </button>
+            <div class="volume-control">
+                <span class="volume-icon">🔊</span>
+                <input type="range" id="volumeSlider" min="0" max="100" value="30" class="volume-slider">
+            </div>
+        </div>
+        <div class="music-info" id="musicInfo">
+            <div class="now-playing">
+                <span class="music-note">♪</span>
+                <span class="song-title">Beautiful Wedding Music</span>
+            </div>
+            <div class="music-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+        </div>
+        <button class="music-minimize" id="musicMinimize">−</button>
+    </div>
+
+    <!-- Audio element (hidden) -->
+    <audio id="backgroundAudio" loop>
+        <!-- Using a placeholder for wedding music - replace with actual audio file -->
+        <source src="https://www.soundjay.com/misc/sounds-986.mp3" type="audio/mpeg">
+        <!-- Fallback: You can add your own audio file here -->
+        <!-- <source src="music/wedding-song.mp3" type="audio/mpeg"> -->
+    </audio>
 
     <script src="script.js"></script>
 </body>
