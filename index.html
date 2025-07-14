@@ -8,9 +8,28 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Playfair+Display:wght@300;400;500;600&family=Open+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="invitation-container">
+    <!-- Skip navigation for screen readers -->
+    <a href="#main-content" class="skip-link">Chuyển đến nội dung chính</a>
+    
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <div class="loading-rings">
+                <div class="loading-ring"></div>
+                <div class="loading-ring"></div>
+                <div class="loading-ring"></div>
+            </div>
+            <div class="loading-text">
+                <h2>💕 Minh Nguyệt & Anh Khoa 💕</h2>
+                <p>Đang tải thiệp cưới...</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="invitation-container" id="invitationContainer">
         <!-- Main Hero Section -->
-        <section class="hero-section">
+        <main id="main-content">
+        <section class="hero-section" aria-label="Thông tin cơ bản về đám cưới">
             <div class="couple-photo">
                 <img src="PNG/main.jpeg" alt="Minh Nguyệt & Anh Khoa" class="main-photo">
             </div>
@@ -585,6 +604,7 @@
                 </div>
             </div>
         </footer>
+        </main>
     </div>
 
     <!-- Background Music Player -->

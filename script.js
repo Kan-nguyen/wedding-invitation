@@ -1,6 +1,174 @@
 // Wedding Invitation Interactive Features
 document.addEventListener('DOMContentLoaded', function() {
     
+    // Loading Screen Management
+    function showLoadingScreen() {
+        const loadingScreen = document.getElementById('loadingScreen');
+        const invitationContainer = document.getElementById('invitationContainer');
+        
+        // Simulate loading time (2-3 seconds)
+        setTimeout(() => {
+            loadingScreen.classList.add('hidden');
+            invitationContainer.classList.add('loaded');
+            
+            // Start staggered section animations
+            setTimeout(() => {
+                initSectionAnimations();
+            }, 300);
+            
+        }, 2500);
+    }
+
+    // Initialize section scroll animations
+    function initSectionAnimations() {
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -10% 0px'
+        };
+
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    // Stagger the animations
+                    setTimeout(() => {
+                        entry.target.classList.add('animate-in');
+                    }, index * 200);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all main sections
+        const sections = document.querySelectorAll('.hero-section, .countdown-section, .wedding-details, .gallery-section, .timeline-section, .rsvp-section, .weather-section, .qr-section');
+        sections.forEach(section => {
+            sectionObserver.observe(section);
+        });
+    }
+
+    // Enhanced smooth scrolling for mobile
+    function initSmoothScroll() {
+        // Add touch momentum scrolling for iOS
+        document.body.style.webkitOverflowScrolling = 'touch';
+        
+        // Optimize scroll performance
+        let ticking = false;
+        
+        function updateScrollEffects() {
+            // Add subtle parallax to background elements
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.hero-section, .countdown-section');
+            
+            parallaxElements.forEach((element, index) => {
+                const speed = 0.5 + (index * 0.1);
+                element.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+            
+            ticking = false;
+        }
+        
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(updateScrollEffects);
+                ticking = true;
+            }
+        });
+    }
+
+    // Optimize touch interactions for mobile
+    function initTouchOptimizations() {
+        // Add touch feedback to interactive elements
+        const touchElements = document.querySelectorAll('button, .main-photo, .thumbnail, .time-unit, .detail-item');
+        
+        touchElements.forEach(element => {
+            element.addEventListener('touchstart', function() {
+                this.style.transform = 'scale(0.98)';
+            }, { passive: true });
+            
+            element.addEventListener('touchend', function() {
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            }, { passive: true });
+        });
+
+        // Prevent 300ms click delay on mobile
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function(event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+    }
+
+    // Enhanced loading with progressive enhancement
+    function progressiveLoad() {
+        // Load critical images first
+        const criticalImages = document.querySelectorAll('.main-photo');
+        const imagePromises = [];
+
+        criticalImages.forEach(img => {
+            if (img.src) {
+                const imageLoad = new Promise((resolve) => {
+                    if (img.complete) {
+                        resolve();
+                    } else {
+                        img.addEventListener('load', resolve);
+                        img.addEventListener('error', resolve);
+                    }
+                });
+                imagePromises.push(imageLoad);
+            }
+        });
+
+        // Load other images after critical ones
+        Promise.all(imagePromises).then(() => {
+            const otherImages = document.querySelectorAll('img:not(.main-photo)');
+            otherImages.forEach(img => {
+                if (img.dataset.src) {
+                    img.src = img.dataset.src;
+                }
+            });
+        });
+    }
+
+    // Initialize viewport height fix for mobile browsers
+    function fixViewportHeight() {
+        const setViewportHeight = () => {
+            const vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        };
+
+        setViewportHeight();
+        window.addEventListener('resize', setViewportHeight);
+        window.addEventListener('orientationchange', setViewportHeight);
+    }
+
+    // Initialize performance optimizations
+    function initPerformanceOptimizations() {
+        // Reduce animations on low-end devices
+        if ('connection' in navigator && navigator.connection.effectiveType === 'slow-2g') {
+            document.body.classList.add('reduced-motion');
+        }
+
+        // Pause heavy animations when page is not visible
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                document.body.classList.add('page-hidden');
+            } else {
+                document.body.classList.remove('page-hidden');
+            }
+        });
+    }
+
+    // Start initialization
+    showLoadingScreen();
+    initSmoothScroll();
+    initTouchOptimizations();
+    progressiveLoad();
+    fixViewportHeight();
+    initPerformanceOptimizations();
+    
     // Smooth scroll animation for better UX
     const observerOptions = {
         threshold: 0.1,
