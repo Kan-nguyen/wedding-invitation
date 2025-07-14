@@ -1,0 +1,524 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    line-height: 1.6;
+    color: #8B4513;
+    background: linear-gradient(135deg, #F5F1E8 0%, #E8DCC0 50%, #F5F1E8 100%);
+    min-height: 100vh;
+}
+
+.invitation-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #FAF7F0;
+    box-shadow: 0 20px 60px rgba(139, 69, 19, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.invitation-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: linear-gradient(90deg, #D4A574 0%, #B8956A 50%, #D4A574 100%);
+    z-index: 10;
+}
+
+/* Hero Section */
+.hero-section {
+    padding: 60px 40px;
+    text-align: center;
+    background: linear-gradient(180deg, #FAF7F0 0%, #F5F1E8 100%);
+    position: relative;
+}
+
+.couple-photo {
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.main-photo {
+    width: 100%;
+    max-width: 400px;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(139, 69, 19, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.main-photo:hover {
+    transform: translateY(-5px);
+}
+
+.couple-names {
+    margin-bottom: 50px;
+}
+
+.initials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+    gap: 20px;
+}
+
+.letter-k, .letter-n {
+    font-family: 'Playfair Display', serif;
+    font-size: 120px;
+    font-weight: 300;
+    color: #B8956A;
+    line-height: 1;
+}
+
+.branch-divider {
+    display: flex;
+    align-items: center;
+}
+
+.branch-divider svg {
+    filter: drop-shadow(2px 2px 4px rgba(184, 149, 106, 0.3));
+}
+
+.full-names {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.full-names h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 400;
+    color: #8B4513;
+    letter-spacing: 3px;
+}
+
+.heart {
+    font-size: 24px;
+    color: #D4A574;
+    animation: heartbeat 2s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.invitation-text {
+    margin-top: 40px;
+}
+
+.honor-text {
+    font-family: 'Dancing Script', cursive;
+    font-size: 24px;
+    color: #8B4513;
+    margin-bottom: 15px;
+    font-style: italic;
+}
+
+.guest-name {
+    font-family: 'Dancing Script', cursive;
+    font-size: 28px;
+    color: #B8956A;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+/* Wedding Details Section */
+.wedding-details {
+    padding: 60px 40px;
+    background: #F8F5F0;
+    border-top: 2px solid #E6D7C3;
+}
+
+.formal-invitation {
+    text-align: center;
+}
+
+.parents-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 50px;
+    padding: 30px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(139, 69, 19, 0.1);
+}
+
+.parent-line .title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #B8956A;
+    margin-bottom: 15px;
+    display: block;
+    border-bottom: 2px solid #E6D7C3;
+    padding-bottom: 10px;
+}
+
+.parent-names p {
+    font-size: 14px;
+    color: #8B4513;
+    margin: 8px 0;
+    font-weight: 500;
+}
+
+.main-invitation {
+    background: white;
+    padding: 50px 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(139, 69, 19, 0.1);
+    position: relative;
+    margin-top: 30px;
+}
+
+.branch-decoration {
+    margin-bottom: 30px;
+}
+
+.main-invitation h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: #8B4513;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.guest-line {
+    font-family: 'Dancing Script', cursive;
+    font-size: 24px;
+    color: #B8956A;
+    margin: 20px 0;
+    font-weight: 600;
+}
+
+.ceremony-text {
+    font-size: 16px;
+    color: #8B4513;
+    margin: 25px 0;
+    line-height: 1.8;
+}
+
+.couple-names-formal {
+    margin: 40px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.bride-name, .groom-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    color: #B8956A;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+.heart-formal {
+    font-size: 20px;
+    color: #D4A574;
+    animation: heartbeat 2s ease-in-out infinite;
+}
+
+.wedding-time {
+    margin: 30px 0;
+}
+
+.wedding-time p {
+    font-size: 18px;
+    color: #8B4513;
+    margin: 10px 0;
+    font-weight: 500;
+}
+
+.wedding-date {
+    font-weight: 600 !important;
+    color: #B8956A !important;
+}
+
+.venue-info {
+    margin-top: 30px;
+    padding-top: 25px;
+    border-top: 2px solid #E6D7C3;
+}
+
+.venue-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: #8B4513;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.address {
+    font-size: 14px;
+    color: #8B4513;
+    font-style: italic;
+}
+
+/* Timeline Section */
+.timeline-section {
+    padding: 60px 40px;
+    background: linear-gradient(180deg, #F8F5F0 0%, #FAF7F0 100%);
+    text-align: center;
+}
+
+.timeline-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    color: #B8956A;
+    margin-bottom: 10px;
+    font-weight: 400;
+}
+
+.timeline-subtitle {
+    font-family: 'Dancing Script', cursive;
+    font-size: 24px;
+    color: #8B4513;
+    margin-bottom: 50px;
+    position: relative;
+}
+
+.timeline-subtitle::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, #D4A574 50%, transparent 100%);
+}
+
+.timeline {
+    max-width: 500px;
+    margin: 0 auto 50px;
+    position: relative;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, #D4A574 0%, #B8956A 50%, #D4A574 100%);
+    transform: translateX(-50%);
+}
+
+.timeline-item {
+    display: flex;
+    align-items: center;
+    margin: 40px 0;
+    position: relative;
+}
+
+.time {
+    flex: 1;
+    text-align: right;
+    font-size: 18px;
+    font-weight: 600;
+    color: #8B4513;
+    padding-right: 30px;
+}
+
+.timeline-dot {
+    width: 16px;
+    height: 16px;
+    background: #B8956A;
+    border-radius: 50%;
+    border: 4px solid white;
+    box-shadow: 0 0 0 2px #B8956A;
+    z-index: 2;
+}
+
+.event {
+    flex: 1;
+    text-align: left;
+    padding-left: 30px;
+}
+
+.event-name {
+    font-size: 16px;
+    color: #8B4513;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.event-icon {
+    font-size: 20px;
+}
+
+.dresscode {
+    margin-top: 50px;
+    padding: 30px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(139, 69, 19, 0.1);
+}
+
+.dresscode h3 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 28px;
+    color: #B8956A;
+    margin-bottom: 20px;
+}
+
+.color-palette {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.color-dot {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 2px 8px rgba(139, 69, 19, 0.2);
+    transition: transform 0.2s ease;
+}
+
+.color-dot:hover {
+    transform: scale(1.2);
+}
+
+/* Footer */
+.invitation-footer {
+    padding: 50px 40px;
+    background: linear-gradient(180deg, #F5F1E8 0%, #E8DCC0 100%);
+    text-align: center;
+    border-top: 2px solid #E6D7C3;
+}
+
+.thank-you p {
+    font-size: 16px;
+    color: #8B4513;
+    margin-bottom: 25px;
+    font-style: italic;
+    line-height: 1.8;
+}
+
+.signature {
+    margin-top: 30px;
+}
+
+.signature p {
+    font-family: 'Dancing Script', cursive;
+    font-size: 20px;
+    color: #B8956A;
+    margin: 10px 0;
+    font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .invitation-container {
+        margin: 0;
+        box-shadow: none;
+    }
+    
+    .hero-section, .wedding-details, .timeline-section, .invitation-footer {
+        padding: 40px 20px;
+    }
+    
+    .letter-k, .letter-n {
+        font-size: 80px;
+    }
+    
+    .full-names h1 {
+        font-size: 28px;
+        letter-spacing: 2px;
+    }
+    
+    .parents-info {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .main-invitation {
+        padding: 40px 25px;
+    }
+    
+    .couple-names-formal {
+        gap: 15px;
+    }
+    
+    .bride-name, .groom-name {
+        font-size: 24px;
+    }
+    
+    .timeline-title {
+        font-size: 28px;
+    }
+    
+    .timeline-item {
+        flex-direction: column;
+        text-align: center;
+        margin: 30px 0;
+    }
+    
+    .timeline::before {
+        display: none;
+    }
+    
+    .time {
+        text-align: center;
+        padding: 0 0 10px 0;
+    }
+    
+    .event {
+        text-align: center;
+        padding: 10px 0 0 0;
+    }
+    
+    .main-photo {
+        height: 400px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-section, .wedding-details, .timeline-section, .invitation-footer {
+        padding: 30px 15px;
+    }
+    
+    .letter-k, .letter-n {
+        font-size: 60px;
+    }
+    
+    .full-names h1 {
+        font-size: 22px;
+    }
+    
+    .main-invitation {
+        padding: 30px 20px;
+    }
+    
+    .main-photo {
+        height: 350px;
+    }
+    
+    .color-palette {
+        gap: 10px;
+    }
+    
+    .color-dot {
+        width: 25px;
+        height: 25px;
+    }
+}
