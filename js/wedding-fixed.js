@@ -558,6 +558,12 @@ document.addEventListener('DOMContentLoaded', function() {
         const mealPreferenceGroup = document.getElementById('mealPreferenceGroup');
         const rsvpSuccess = document.getElementById('rsvpSuccess');
 
+        // Check for success parameter in URL
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('success') === 'true') {
+            showSuccessMessage();
+        }
+
         // Set submission timestamp on page load
         const submissionTimeField = document.getElementById('submissionTime');
         if (submissionTimeField) {
@@ -628,6 +634,73 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Success handling will be done by the external service or page redirect
             });
         }
+    }
+    
+    function showSuccessMessage() {
+        // Create success overlay
+        const successOverlay = document.createElement('div');
+        successOverlay.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(139, 69, 19, 0.9);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+        `;
+        
+        successOverlay.innerHTML = `
+            <div style="
+                background: white;
+                padding: 40px;
+                border-radius: 20px;
+                text-align: center;
+                max-width: 400px;
+                margin: 20px;
+                box-shadow: 0 20px 60px rgba(139, 69, 19, 0.3);
+            ">
+                <div style="font-size: 48px; margin-bottom: 20px;">🎉</div>
+                <h3 style="
+                    font-family: 'Playfair Display', serif;
+                    color: #8B4513;
+                    margin-bottom: 15px;
+                    font-size: 24px;
+                ">Cảm ơn bạn!</h3>
+                <p style="
+                    color: #B8956A;
+                    margin-bottom: 25px;
+                    line-height: 1.6;
+                    font-family: 'Inter', sans-serif;
+                ">RSVP của bạn đã được gửi thành công. Chúng tôi rất mong được gặp bạn trong ngày trọng đại!</p>
+                <button onclick="this.parentElement.parentElement.remove(); window.history.replaceState({}, '', window.location.pathname);" style="
+                    background: linear-gradient(135deg, #D4A574 0%, #B8956A 100%);
+                    color: white;
+                    border: none;
+                    padding: 12px 24px;
+                    border-radius: 25px;
+                    font-family: 'Inter', sans-serif;
+                    font-weight: 500;
+                    cursor: pointer;
+                    transition: transform 0.2s ease;
+                " onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                    Đóng
+                </button>
+            </div>
+        `;
+        
+        document.body.appendChild(successOverlay);
+        
+        // Auto close after 10 seconds
+        setTimeout(() => {
+            if (successOverlay.parentElement) {
+                successOverlay.remove();
+                window.history.replaceState({}, '', window.location.pathname);
+            }
+        }, 10000);
     }
     
     // RSVP Analytics Dashboard (for admin use)

@@ -633,10 +633,11 @@
                 <h2 class="rsvp-title">Xác nhận tham dự</h2>
                 <p class="rsvp-subtitle">Vui lòng cho chúng tôi biết bạn có thể tham dự không</p>
                 
-                <form class="rsvp-form" id="rsvpForm" name="wedding-rsvp" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" action="https://formspree.io/f/xgejyvpn">
+                <form class="rsvp-form" id="rsvpForm" name="wedding-rsvp" method="POST" action="https://formspree.io/f/xgejyvpn">
                     <!-- Hidden fields for form processing -->
-                    <input type="hidden" name="bot-field" />
-                    <input type="hidden" name="form-name" value="wedding-rsvp" />
+                    <input type="hidden" name="_subject" value="🎉 RSVP mới - Wedding Invitation" />
+                    <input type="hidden" name="_next" value="https://kan-nguyen.github.io/wedding-invitation/?success=true" />
+                    <input type="hidden" name="_captcha" value="false" />
                     <input type="hidden" name="submission-time" id="submissionTime" />
                     <input type="hidden" name="invitation-source" value="wedding-website" />
                     
