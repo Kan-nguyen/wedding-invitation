@@ -1,7 +1,13 @@
-# 💍 Wedding Invitation - Anh Khoa & Minh Nguyệt
+# 💍 Wedding Invitation Website
+
+> A beautiful, responsive wedding invitation website built with modern web technologies
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Website-gold?style=for-the-badge)](https://kan-nguyen.github.io/wedding-invitation/)
 [![GitHub Pages](https://img.shields.io/badge/Deployed%20on-GitHub%20Pages-blue?style=for-the-badge&logo=github)](https://github.com/Kan-nguyen/wedding-invitation)
+[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](./LICENSE)
+[![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
+[![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
+[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 
 ## 🌟 **Overview**
 Beautiful, responsive wedding invitation website with background music, photo gallery, and interactive features.
@@ -131,8 +137,27 @@ python3 -m http.server 8000
 For technical support or customization requests, refer to the documentation in the `docs/` folder.
 
 ## 📄 **License**
-Private wedding invitation - All rights reserved to the families of Anh Khoa & Minh Nguyệt.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🤝 **Contributing**
+Contributions are welcome! Please feel free to submit a Pull Request. See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+## ⭐ **Show Your Support**
+If you found this project helpful, please give it a ⭐ on GitHub!
+
+## 🙏 **Acknowledgments**
+- Design inspiration from modern wedding websites
+- Icons from various open-source collections
+- Music tracks used with proper licensing
 
 ---
-*Created with ❤️ for a special day*
+
+<div align="center">
+
+**Created with ❤️ for special moments**
+
+[🌐 Live Demo](https://kan-nguyen.github.io/wedding-invitation/) • [📚 Documentation](./docs/) • [🐛 Report Bug](https://github.com/Kan-nguyen/wedding-invitation/issues)
+
 *Last updated: July 25, 2025*
+
+</div>
