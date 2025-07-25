@@ -1849,11 +1849,14 @@ input[type="radio"]:checked + .radio-label .radio-custom::after {
     
     .countdown-timer {
         gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
     }
     
     .time-unit {
         min-width: 80px;
         padding: 20px 15px;
+        flex: 0 0 auto;
     }
     
     .time-number {
@@ -1863,6 +1866,76 @@ input[type="radio"]:checked + .radio-label .radio-custom::after {
     .countdown-message p {
         font-size: 18px;
     }
+}
+
+/* iPhone specific optimizations */
+@media (max-width: 414px) {
+    .countdown-section {
+        padding: 30px 15px;
+    }
+    
+    .countdown-title {
+        font-size: 22px;
+        margin-bottom: 25px;
+    }
+    
+    .countdown-timer {
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .time-unit {
+        min-width: 70px;
+        max-width: 75px;
+        padding: 15px 10px;
+        margin: 5px;
+        flex: 0 0 calc(50% - 20px);
+    }
+    
+    .time-number {
+        font-size: 28px;
+        line-height: 1.1;
+    }
+    
+    .time-label {
+        font-size: 12px;
+        margin-top: 8px;
+    }
+    
+    .countdown-message p {
+        font-size: 16px;
+        margin-top: 20px;
+        line-height: 1.4;
+    }
+}
+
+/* Very small phones (iPhone SE, etc.) */
+@media (max-width: 375px) {
+    .countdown-timer {
+        gap: 8px;
+    }
+    
+    .time-unit {
+        min-width: 65px;
+        max-width: 70px;
+        padding: 12px 8px;
+        flex: 0 0 calc(50% - 16px);
+    }
+    
+    .time-number {
+        font-size: 24px;
+    }
+    
+    .time-label {
+        font-size: 11px;
+    }
+    
+    .countdown-title {
+        font-size: 20px;
+    }
+}
     
     .rsvp-section {
         padding: 40px 20px;
@@ -2736,6 +2809,180 @@ input[type="radio"]:checked + .radio-label .radio-custom::after {
     .gallery-controls {
         flex-direction: column;
         gap: 15px;
+    }
+}
+
+/* iPhone Gallery Optimizations */
+@media (max-width: 414px) {
+    .gallery-section {
+        padding: 30px 15px;
+    }
+    
+    .gallery-title {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+    
+    .gallery-subtitle {
+        font-size: 14px;
+        margin-bottom: 25px;
+    }
+    
+    .slideshow-container {
+        max-width: 100%;
+        margin: 0 auto;
+        border-radius: 15px;
+        overflow: hidden;
+    }
+    
+    .slide {
+        min-height: 250px;
+        max-height: 300px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .slide-image {
+        max-width: 100%;
+        max-height: 280px;
+        min-height: 200px;
+        object-fit: contain;
+        border-radius: 10px;
+    }
+    
+    .slide-image[data-orientation="portrait"] {
+        height: 280px;
+        width: auto;
+        max-width: 90%;
+    }
+    
+    .slide-image[data-orientation="landscape"] {
+        width: 100%;
+        height: auto;
+        max-height: 250px;
+    }
+    
+    .slide-nav {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid #E6D7C3;
+    }
+    
+    .slide-nav.prev {
+        left: 8px;
+    }
+    
+    .slide-nav.next {
+        right: 8px;
+    }
+    
+    .slide-caption {
+        padding: 20px 15px 15px;
+        background: rgba(255, 255, 255, 0.95);
+    }
+    
+    .slide-caption h3 {
+        font-size: 18px;
+        margin-bottom: 8px;
+    }
+    
+    .slide-caption p {
+        font-size: 13px;
+        line-height: 1.4;
+    }
+    
+    .thumbnails {
+        grid-template-columns: repeat(4, 1fr);
+        max-height: 200px;
+        gap: 6px;
+        padding: 15px 0;
+    }
+    
+    .thumbnail {
+        height: 60px;
+        border-radius: 8px;
+    }
+    
+    .gallery-controls {
+        flex-direction: column;
+        gap: 12px;
+        padding: 15px;
+    }
+    
+    .gallery-info {
+        padding: 15px;
+        margin-top: 20px;
+        border-radius: 12px;
+    }
+    
+    .gallery-note {
+        font-size: 13px;
+        line-height: 1.4;
+    }
+}
+
+/* Very small phones (iPhone SE, etc.) */
+@media (max-width: 375px) {
+    .gallery-section {
+        padding: 25px 12px;
+    }
+    
+    .gallery-title {
+        font-size: 22px;
+    }
+    
+    .slide {
+        min-height: 200px;
+        max-height: 250px;
+    }
+    
+    .slide-image {
+        max-height: 230px;
+        min-height: 180px;
+    }
+    
+    .slide-image[data-orientation="portrait"] {
+        height: 230px;
+        max-width: 85%;
+    }
+    
+    .slide-image[data-orientation="landscape"] {
+        max-height: 200px;
+    }
+    
+    .slide-nav {
+        width: 35px;
+        height: 35px;
+        font-size: 14px;
+    }
+    
+    .slide-nav.prev {
+        left: 5px;
+    }
+    
+    .slide-nav.next {
+        right: 5px;
+    }
+    
+    .thumbnails {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 5px;
+    }
+    
+    .thumbnail {
+        height: 55px;
+    }
+    
+    .slide-caption h3 {
+        font-size: 16px;
+    }
+    
+    .slide-caption p {
+        font-size: 12px;
     }
 }
 
