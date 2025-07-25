@@ -5,6 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thiệp Cưới - Minh Nguyệt & Anh Khoa</title>
     
+    <!-- SEO and Social Media Meta Tags -->
+    <meta name="description" content="Thiệp cưới trực tuyến của Minh Nguyệt & Anh Khoa - 27/07/2025 tại JW Marriott Hotel Saigon">
+    <meta name="author" content="Anh Khoa & Minh Nguyệt">
+    <link rel="canonical" href="https://kan-nguyen.github.io/wedding-invitation/">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kan-nguyen.github.io/wedding-invitation/">
+    <meta property="og:title" content="Thiệp Cưới - Minh Nguyệt & Anh Khoa">
+    <meta property="og:description" content="Thiệp cưới trực tuyến - 27/07/2025 tại JW Marriott Hotel Saigon">
+    <meta property="og:image" content="https://kan-nguyen.github.io/wedding-invitation/images/main/hero-image.jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://kan-nguyen.github.io/wedding-invitation/">
+    <meta property="twitter:title" content="Thiệp Cưới - Minh Nguyệt & Anh Khoa">
+    <meta property="twitter:description" content="Thiệp cưới trực tuyến - 27/07/2025 tại JW Marriott Hotel Saigon">
+    <meta property="twitter:image" content="https://kan-nguyen.github.io/wedding-invitation/images/main/hero-image.jpeg">
+    
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png?v=2">
@@ -568,24 +589,42 @@
                 <h2 class="rsvp-title">Xác nhận tham dự</h2>
                 <p class="rsvp-subtitle">Vui lòng cho chúng tôi biết bạn có thể tham dự không</p>
                 
-                <form class="rsvp-form" id="rsvpForm" name="wedding-rsvp" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
+                <form class="rsvp-form" id="rsvpForm" name="wedding-rsvp" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" action="https://formspree.io/f/xgejyvpn">
                     <!-- Hidden fields for form processing -->
                     <input type="hidden" name="bot-field" />
                     <input type="hidden" name="form-name" value="wedding-rsvp" />
+                    <input type="hidden" name="submission-time" id="submissionTime" />
+                    <input type="hidden" name="invitation-source" value="wedding-website" />
                     
                     <div class="form-group">
                         <label for="guestName">Họ và tên *</label>
-                        <input type="text" id="guestName" name="guestName" required placeholder="Nhập họ tên của bạn">
+                        <input type="text" id="guestName" name="guestName" required placeholder="Ví dụ: Nguyễn Văn An" maxlength="100">
                     </div>
                     
                     <div class="form-group">
-                        <label for="guestEmail">Email *</label>
-                        <input type="email" id="guestEmail" name="guestEmail" required placeholder="email@example.com">
+                        <label for="guestPhone">Số điện thoại *</label>
+                        <input type="tel" id="guestPhone" name="guestPhone" required placeholder="0901 234 567" pattern="[0-9]{10,11}">
+                        <small class="field-help">Để chúng tôi có thể liên lạc khi cần thiết</small>
                     </div>
                     
                     <div class="form-group">
-                        <label for="guestPhone">Số điện thoại</label>
-                        <input type="tel" id="guestPhone" name="guestPhone" placeholder="0123 456 789">
+                        <label for="guestEmail">Email (không bắt buộc)</label>
+                        <input type="email" id="guestEmail" name="guestEmail" placeholder="email@example.com" maxlength="100">
+                        <small class="field-help">Chỉ điền nếu bạn muốn nhận thông tin cập nhật</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="relationship">Mối quan hệ với cô dâu chú rể *</label>
+                        <select id="relationship" name="relationship" required>
+                            <option value="">-- Chọn mối quan hệ --</option>
+                            <option value="family-bride">Gia đình cô dâu</option>
+                            <option value="family-groom">Gia đình chú rể</option>
+                            <option value="friend-bride">Bạn bè cô dâu</option>
+                            <option value="friend-groom">Bạn bè chú rể</option>
+                            <option value="friend-both">Bạn chung</option>
+                            <option value="colleague">Đồng nghiệp</option>
+                            <option value="other">Khác</option>
+                        </select>
                     </div>
                     
                     <div class="form-group">
@@ -778,6 +817,54 @@
             </div>
         </section>
 
+        <!-- Message Wall Section -->
+        <section class="message-wall-section">
+            <div class="message-wall-container">
+                <h2 class="message-wall-title">💌 Lời chúc từ mọi người</h2>
+                <p class="message-wall-subtitle">Những lời chúc tốt đẹp từ bạn bè và gia đình</p>
+                
+                <div class="message-wall" id="messageWall">
+                    <div class="message-loading">
+                        <div class="loading-spinner"></div>
+                        <p>Đang tải lời chúc...</p>
+                    </div>
+                    
+                    <!-- Messages sẽ được load động -->
+                    <div class="messages-container" id="messagesContainer" style="display: none;">
+                        <!-- Sample message structure -->
+                        <div class="message-card sample-message" style="display: none;">
+                            <div class="message-content">
+                                <div class="message-text"></div>
+                                <div class="message-author">
+                                    <span class="author-name"></span>
+                                    <span class="message-time"></span>
+                                </div>
+                            </div>
+                            <div class="message-heart">💕</div>
+                        </div>
+                    </div>
+                    
+                    <div class="no-messages" id="noMessages" style="display: none;">
+                        <div class="empty-state">
+                            <span class="empty-icon">💭</span>
+                            <p>Chưa có lời chúc nào. Hãy là người đầu tiên gửi lời chúc cho cô dâu chú rể!</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="message-wall-actions">
+                    <button class="refresh-messages-btn" id="refreshMessages">
+                        <span class="btn-icon">🔄</span>
+                        <span class="btn-text">Tải lại</span>
+                    </button>
+                    <button class="scroll-to-rsvp-btn" id="scrollToRSVP">
+                        <span class="btn-icon">✍️</span>
+                        <span class="btn-text">Gửi lời chúc</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
         <!-- QR Code Section -->
         <section class="qr-section">
             <div class="qr-container">
@@ -815,10 +902,25 @@
                 <p class="gratitude-text">Sự hiện diện của quý khách là niềm vinh hạnh cho gia đình chúng tôi</p>
                 
                 <div class="signature-section">
-                    <div class="signature-ornament">❦</div>
-                    <p class="signature-regards">Trân trọng,</p>
-                    <p class="signature-names">Gia đình Anh Khoa & Minh Nguyệt</p>
-                    <div class="signature-date">27 • 07 • 2025</div>
+                    <div class="signature-top-ornament">
+                        <div class="ornament-simple">❦</div>
+                    </div>
+                    
+                    <div class="signature-content">
+                        <p class="signature-regards">Trân trọng,</p>
+                        <div class="signature-names-container">
+                            <p class="signature-names">Gia đình Anh Khoa & Minh Nguyệt</p>
+                            <div class="signature-underline"></div>
+                        </div>
+                        
+                        <div class="signature-date-container">
+                            <div class="signature-date">27 • 07 • 2025</div>
+                        </div>
+                    </div>
+                    
+                    <div class="signature-bottom-decoration">
+                        <div class="decorative-line"></div>
+                    </div>
                 </div>
             </div>
             
