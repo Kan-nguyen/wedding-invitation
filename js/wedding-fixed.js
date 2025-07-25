@@ -884,6 +884,54 @@ document.addEventListener('DOMContentLoaded', function() {
                     const isMinimized = musicPlayer.classList.contains('minimized');
                     musicPlayer.classList.toggle('minimized');
                     this.textContent = isMinimized ? '−' : '+';
+                    
+                    // Save minimize state to localStorage
+                    localStorage.setItem('musicPlayerMinimized', !isMinimized);
+                }
+            });
+        }
+        
+        // Auto-minimize on mobile devices and restore saved state
+        function handleMusicPlayerResponsive() {
+            const musicPlayer = document.getElementById('musicPlayer');
+            const musicMinimizeBtn = document.getElementById('musicMinimize');
+            
+            if (musicPlayer && musicMinimizeBtn) {
+                const isMobile = window.innerWidth <= 768;
+                const savedState = localStorage.getItem('musicPlayerMinimized');
+                
+                // Auto-minimize on first load for mobile, or restore saved state
+                if (savedState === null && isMobile) {
+                    // First time on mobile - auto minimize
+                    musicPlayer.classList.add('minimized');
+                    musicMinimizeBtn.textContent = '+';
+                    localStorage.setItem('musicPlayerMinimized', 'true');
+                } else if (savedState === 'true') {
+                    // Restore minimized state
+                    musicPlayer.classList.add('minimized');
+                    musicMinimizeBtn.textContent = '+';
+                } else {
+                    // Restore expanded state
+                    musicPlayer.classList.remove('minimized');
+                    musicMinimizeBtn.textContent = '−';
+                }
+            }
+        }
+        
+        // Call responsive handler on load and resize
+        handleMusicPlayerResponsive();
+        window.addEventListener('resize', handleMusicPlayerResponsive);
+        
+        // Make minimized player clickable to expand (better UX)
+        const musicPlayer = document.getElementById('musicPlayer');
+        if (musicPlayer) {
+            musicPlayer.addEventListener('click', function(e) {
+                // Only trigger if clicking on the minimized player itself, not buttons inside
+                if (this.classList.contains('minimized') && e.target === this) {
+                    const musicMinimizeBtn = document.getElementById('musicMinimize');
+                    if (musicMinimizeBtn) {
+                        musicMinimizeBtn.click();
+                    }
                 }
             });
         }

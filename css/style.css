@@ -3007,6 +3007,12 @@ input[type="radio"]:checked + .radio-label .radio-custom::after {
     padding: 15px;
     max-width: 60px;
     min-width: 60px;
+    cursor: pointer;
+}
+
+.music-player.minimized:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 35px rgba(139, 69, 19, 0.25);
 }
 
 .music-player.minimized .music-info,
@@ -3216,23 +3222,33 @@ input[type="radio"]:checked + .radio-label .radio-custom::after {
 /* Music Player Responsive */
 @media (max-width: 768px) {
     .music-player {
-        bottom: 10px;
-        right: 10px;
-        left: 10px;
-        max-width: none;
-        min-width: auto;
+        bottom: 15px;
+        right: 15px;
+        left: auto;
+        max-width: 280px;
+        min-width: 250px;
+        border-radius: 20px;
+        box-shadow: 0 8px 25px rgba(139, 69, 19, 0.15);
     }
     
     .music-player.minimized {
         left: auto;
-        max-width: 60px;
-        min-width: 60px;
+        max-width: 55px;
+        min-width: 55px;
+        padding: 12px;
+        border-radius: 50%;
     }
     
     .music-controls {
         flex-direction: column;
-        gap: 10px;
-        margin-bottom: 10px;
+        gap: 8px;
+        margin-bottom: 8px;
+    }
+    
+    .music-btn {
+        padding: 10px 14px;
+        font-size: 13px;
+        border-radius: 10px;
     }
     
     .volume-control {
@@ -3241,7 +3257,93 @@ input[type="radio"]:checked + .radio-label .radio-custom::after {
     }
     
     .volume-slider {
-        width: 120px;
+        width: 100px;
+    }
+    
+    .music-info h4 {
+        font-size: 14px;
+    }
+    
+    .music-info p {
+        font-size: 12px;
+    }
+}
+
+/* iPhone specific music player optimizations */
+@media (max-width: 414px) {
+    .music-player {
+        bottom: 12px;
+        right: 12px;
+        max-width: 240px;
+        min-width: 200px;
+        padding: 15px;
+        border-radius: 18px;
+    }
+    
+    .music-player.minimized {
+        max-width: 50px;
+        min-width: 50px;
+        padding: 10px;
+        border-radius: 50%;
+        bottom: 15px;
+        right: 15px;
+    }
+    
+    .music-controls {
+        gap: 6px;
+        margin-bottom: 6px;
+    }
+    
+    .music-btn {
+        padding: 8px 12px;
+        font-size: 12px;
+        gap: 6px;
+    }
+    
+    .music-icon {
+        font-size: 14px;
+    }
+    
+    .volume-slider {
+        width: 80px;
+        height: 4px;
+    }
+    
+    .music-info h4 {
+        font-size: 13px;
+        margin-bottom: 2px;
+    }
+    
+    .music-info p {
+        font-size: 11px;
+    }
+    
+    .volume-label {
+        font-size: 11px;
+    }
+}
+
+/* Very small phones (iPhone SE, etc.) */
+@media (max-width: 375px) {
+    .music-player {
+        max-width: 200px;
+        min-width: 180px;
+        padding: 12px;
+    }
+    
+    .music-player.minimized {
+        max-width: 45px;
+        min-width: 45px;
+        padding: 8px;
+    }
+    
+    .music-btn {
+        padding: 6px 10px;
+        font-size: 11px;
+    }
+    
+    .music-icon {
+        font-size: 12px;
     }
 }
 
