@@ -1,0 +1,929 @@
+/**
+ * Wedding Invitation - Optimized Version
+ * Clean & Performance Focused
+ */
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // Loading Screen Management
+    function showLoadingScreen() {
+        const loadingScreen = document.getElementById('loadingScreen');
+        const invitationContainer = document.getElementById('invitationContainer');
+        
+        setTimeout(() => {
+            loadingScreen?.classList.add('hidden');
+            invitationContainer?.classList.add('loaded');
+            
+            // Start music after loading screen disappears
+            setTimeout(() => {
+                initSectionAnimations();
+                attemptAutoplay();
+                
+                // Show music prompt after a brief delay if autoplay failed
+                setTimeout(() => {
+                    if (!isMusicPlaying && !musicInitialized) {
+                        console.log('🎵 Autoplay failed, showing music prompt popup');
+                        showMusicEnablePopup();
+                    }
+                }, 1500);
+            }, 300);
+        }, 2500);
+    }
+
+    // Simple section animations
+    function initSectionAnimations() {
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                    
+                    if (entry.target.classList.contains('countdown-section')) {
+                        sectionObserver.unobserve(entry.target);
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe all main sections
+        const sections = document.querySelectorAll('.hero-section, .countdown-section, .wedding-details, .gallery-section, .timeline-section, .rsvp-section, .weather-section, .qr-section');
+        sections.forEach(section => {
+            sectionObserver.observe(section);
+        });
+    }
+
+    // Countdown Timer Function
+    function updateCountdown() {
+        const weddingDate = new Date('2025-07-27T17:00:00').getTime();
+        const now = new Date().getTime();
+        const distance = weddingDate - now;
+
+        if (distance > 0) {
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Update countdown display
+            updateTimeUnit('days', days);
+            updateTimeUnit('hours', hours);
+            updateTimeUnit('minutes', minutes);
+            updateTimeUnit('seconds', seconds);
+        } else {
+            // Wedding day has arrived!
+            const titleElement = document.querySelector('.countdown-title');
+            const timerElement = document.querySelector('.countdown-timer');
+            if (titleElement) titleElement.innerHTML = '🎉 Ngày cưới đã đến! 🎉';
+            if (timerElement) timerElement.innerHTML = '<div class="celebration">Chúc mừng cô dâu chú rể!</div>';
+        }
+    }
+
+    function updateTimeUnit(elementId, newValue) {
+        const element = document.getElementById(elementId);
+        if (element) {
+            const formattedValue = String(newValue).padStart(2, '0');
+            if (element.textContent !== formattedValue) {
+                element.textContent = formattedValue;
+            }
+        }
+    }
+
+    // Music Player System
+    let currentTrackIndex = 0;
+    let isMusicPlaying = false;
+    let musicInitialized = false;
+    // Music files - supports both MP3 and MP4 formats
+    // Try MP4 first (since it was working before), then fallback to MP3
+    const musicFiles = [
+        {
+            mp4: 'music/a-thousand-years.mp4',
+            mp3: 'music/a-thousand-years.mp3',
+            name: 'A Thousand Years'
+        },
+        {
+            mp4: 'music/Hon-ca-yeu.mp4', 
+            mp3: 'music/Hon-ca-yeu.mp3',
+            name: 'Hơn Cả Yêu'
+        }
+    ];
+    
+    // Auto-detect music files in folder (supports MP3, MP4, WAV, OGG)
+    // Add new files to the array above or they'll be auto-detected
+
+
+    // Function to get the best audio source for current track
+    function getCurrentAudioSource() {
+        const track = musicFiles[currentTrackIndex];
+        // Try MP4 first (was working before), then MP3
+        return track.mp4;
+    }
+
+    function initMusicPlayer() {
+        console.log('🎵 Initializing music player...');
+        console.log('🎵 Available tracks:', musicFiles.map(t => t.name));
+        
+        const audio = document.getElementById('backgroundAudio');
+        if (!audio) {
+            console.log('❌ No audio element found');
+            return;
+        }
+
+        // Set up audio with first track - use MP4 since it was working before
+        const firstTrackSrc = getCurrentAudioSource();
+        audio.src = firstTrackSrc;
+        audio.volume = 0.3;
+        audio.loop = false;
+        
+        console.log('🎵 Audio source set to:', audio.src);
+
+        // Setup event listeners
+        audio.addEventListener('loadeddata', () => {
+            console.log('🎵 Audio loaded successfully');
+        });
+
+        audio.addEventListener('canplay', () => {
+            console.log('🎵 Audio can play');
+        });
+
+        audio.addEventListener('play', () => {
+            console.log('🎵 Audio play event fired');
+            isMusicPlaying = true;
+            musicInitialized = true;
+            updateMusicButton(true);
+        });
+
+        audio.addEventListener('pause', () => {
+            console.log('🎵 Audio pause event fired');
+            isMusicPlaying = false;
+            updateMusicButton(false);
+        });
+
+        audio.addEventListener('ended', () => {
+            console.log('🎵 Track ended, switching to next...');
+            currentTrackIndex = (currentTrackIndex + 1) % musicFiles.length;
+            const nextSrc = getCurrentAudioSource();
+            audio.src = nextSrc;
+            console.log('🎵 Loading next track:', nextSrc);
+            audio.load();
+            if (isMusicPlaying) {
+                setTimeout(() => {
+                    audio.play().catch(console.error);
+                }, 500);
+            }
+        });
+
+        audio.addEventListener('error', (e) => {
+            console.log('🎵 Audio error:', e.target.error);
+            const currentTrack = musicFiles[currentTrackIndex];
+            
+            // If MP4 failed, try MP3
+            if (audio.src.includes('.mp4') && currentTrack.mp3) {
+                console.log('🎵 MP4 failed, trying MP3:', currentTrack.mp3);
+                audio.src = currentTrack.mp3;
+                audio.load();
+            } else {
+                // Try next track
+                console.log('🎵 Trying next track...');
+                currentTrackIndex = (currentTrackIndex + 1) % musicFiles.length;
+                if (currentTrackIndex < musicFiles.length) {
+                    audio.src = getCurrentAudioSource();
+                    audio.load();
+                }
+            }
+        });
+
+        // Load the audio
+        audio.load();
+        
+        // Multiple autoplay attempts with different timing
+        audio.addEventListener('canplaythrough', () => {
+            setTimeout(attemptAutoplay, 100);
+        });
+        
+        // Additional fallback attempts
+        setTimeout(() => attemptAutoplay(), 3000);
+        setTimeout(() => attemptAutoplay(), 5000);
+        
+        console.log('🎵 Music player initialized - ready for user interaction');
+        updateMusicButton(false);
+        
+        // Periodic state sync to prevent UI desync
+        setInterval(() => {
+            const realState = checkRealAudioState();
+            if (realState !== isMusicPlaying) {
+                console.log('🎵 Syncing state - real:', realState, 'tracked:', isMusicPlaying);
+                isMusicPlaying = realState;
+                updateMusicButton(realState);
+            }
+        }, 1000);
+    }
+
+    function attemptAutoplay() {
+        if (musicInitialized) return;
+        
+        console.log('🎵 Attempting autoplay...');
+        const audio = document.getElementById('backgroundAudio');
+        if (!audio) return;
+        
+        // Multiple strategies for autoplay
+        const strategies = [
+            // Strategy 1: Silent start then fade in
+            () => {
+                audio.volume = 0;
+                audio.muted = true;
+                return audio.play().then(() => {
+                    audio.muted = false;
+                    return fadeInMusic(audio);
+                });
+            },
+            // Strategy 2: Very low volume start
+            () => {
+                audio.volume = 0.01;
+                return audio.play().then(() => {
+                    return fadeInMusic(audio);
+                });
+            },
+            // Strategy 3: Normal play (last resort)
+            () => {
+                audio.volume = 0.3;
+                return audio.play();
+            }
+        ];
+        
+        // Try strategies one by one
+        async function tryStrategies() {
+            for (let i = 0; i < strategies.length; i++) {
+                try {
+                    console.log(`🎵 Trying autoplay strategy ${i + 1}...`);
+                    await strategies[i]();
+                    console.log(`✅ Autoplay successful with strategy ${i + 1}!`);
+                    musicInitialized = true;
+                    isMusicPlaying = true;
+                    updateMusicButton(true);
+                    return;
+                } catch (error) {
+                    console.log(`❌ Strategy ${i + 1} failed:`, error.message);
+                    if (i === strategies.length - 1) {
+                        // All strategies failed
+                        throw error;
+                    }
+                }
+            }
+        }
+        
+        tryStrategies().catch((error) => {
+            console.log('🎵 All autoplay strategies failed:', error.message);
+            musicInitialized = false;
+            isMusicPlaying = false;
+            audio.volume = 0.3;
+            audio.muted = false;
+            updateMusicButton(false);
+            showMusicPrompt();
+        });
+    }
+    
+    function fadeInMusic(audio) {
+        return new Promise((resolve) => {
+            let volume = 0;
+            audio.volume = 0;
+            const fadeInterval = setInterval(() => {
+                if (volume < 0.3) {
+                    volume += 0.02;
+                    audio.volume = Math.min(volume, 0.3);
+                } else {
+                    clearInterval(fadeInterval);
+                    console.log('🎵 Fade-in completed');
+                    resolve();
+                }
+            }, 100);
+        });
+    }
+
+    function showMusicPrompt() {
+        const musicToggle = document.getElementById('musicToggle');
+        if (musicToggle) {
+            musicToggle.style.animation = 'pulse 2s infinite';
+            musicToggle.title = 'Nhấn để phát nhạc nền';
+        }
+        
+        // Show a nice popup prompt
+        showMusicEnablePopup();
+    }
+    
+    function showMusicEnablePopup() {
+        // Don't show if already shown or music is playing
+        if (document.getElementById('musicPromptPopup') || isMusicPlaying) return;
+        
+        const popup = document.createElement('div');
+        popup.id = 'musicPromptPopup';
+        popup.innerHTML = `
+            <div style="
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(10px);
+                padding: 25px 35px;
+                border-radius: 15px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                text-align: center;
+                z-index: 10000;
+                font-family: 'Playfair Display', serif;
+                border: 2px solid #d4af37;
+                max-width: 300px;
+                animation: fadeInScale 0.5s ease-out;
+            ">
+                <div style="font-size: 24px; margin-bottom: 10px;">🎵</div>
+                <div style="font-size: 18px; color: #333; margin-bottom: 15px; font-weight: 600;">
+                    Bật nhạc nền?
+                </div>
+                <div style="font-size: 14px; color: #666; margin-bottom: 20px; line-height: 1.4;">
+                    Để trải nghiệm thiệp cưới trọn vẹn với nhạc nền lãng mạn
+                </div>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <button id="enableMusicBtn" style="
+                        background: linear-gradient(135deg, #d4af37, #f7e98e);
+                        color: #333;
+                        border: none;
+                        padding: 10px 20px;
+                        border-radius: 25px;
+                        cursor: pointer;
+                        font-weight: 600;
+                        font-size: 14px;
+                        transition: all 0.3s ease;
+                    ">
+                        🎶 Bật nhạc
+                    </button>
+                    <button id="skipMusicBtn" style="
+                        background: transparent;
+                        color: #666;
+                        border: 1px solid #ddd;
+                        padding: 10px 20px;
+                        border-radius: 25px;
+                        cursor: pointer;
+                        font-size: 14px;
+                        transition: all 0.3s ease;
+                    ">
+                        Bỏ qua
+                    </button>
+                </div>
+            </div>
+            <div style="
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.3);
+                z-index: 9999;
+            "></div>
+        `;
+        
+        // Add CSS animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInScale {
+                from {
+                    opacity: 0;
+                    transform: translate(-50%, -50%) scale(0.8);
+                }
+                to {
+                    opacity: 1;
+                    transform: translate(-50%, -50%) scale(1);
+                }
+            }
+            #enableMusicBtn:hover {
+                background: linear-gradient(135deg, #e5c047, #f8ed99) !important;
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+            }
+            #skipMusicBtn:hover {
+                background: #f5f5f5 !important;
+                border-color: #ccc !important;
+                transform: translateY(-1px);
+            }
+        `;
+        document.head.appendChild(style);
+        
+        document.body.appendChild(popup);
+        
+        // Handle buttons
+        document.getElementById('enableMusicBtn').addEventListener('click', () => {
+            console.log('🎵 User chose to enable music');
+            popup.remove();
+            // Force play music
+            const audio = document.getElementById('backgroundAudio');
+            if (audio) {
+                audio.volume = 0.3;
+                audio.play().then(() => {
+                    console.log('🎵 Music started from popup!');
+                    isMusicPlaying = true;
+                    musicInitialized = true;
+                    updateMusicButton(true);
+                }).catch(console.error);
+            }
+        });
+        
+        document.getElementById('skipMusicBtn').addEventListener('click', () => {
+            console.log('🎵 User chose to skip music');
+            popup.remove();
+        });
+        
+        // Auto close after 10 seconds
+        setTimeout(() => {
+            if (document.getElementById('musicPromptPopup')) {
+                popup.remove();
+            }
+        }, 10000);
+    }
+
+    function checkRealAudioState() {
+        const audio = document.getElementById('backgroundAudio');
+        if (!audio) return false;
+        
+        const isActuallyPlaying = !audio.paused && !audio.ended && audio.currentTime > 0 && audio.readyState > 2;
+        console.log('🎵 Real audio state check:', {
+            paused: audio.paused,
+            ended: audio.ended,
+            currentTime: audio.currentTime,
+            readyState: audio.readyState,
+            actuallyPlaying: isActuallyPlaying
+        });
+        
+        return isActuallyPlaying;
+    }
+
+    function updateMusicButton(playing) {
+        const musicToggle = document.getElementById('musicToggle');
+        if (musicToggle) {
+            // Double check with real audio state
+            const realState = checkRealAudioState();
+            const actuallyPlaying = playing && realState;
+            
+            if (actuallyPlaying) {
+                musicToggle.innerHTML = '<span class="music-icon">⏸️</span><span class="music-text">Tạm dừng</span>';
+                musicToggle.style.animation = 'none';
+            } else {
+                musicToggle.innerHTML = '<span class="music-icon">🎵</span><span class="music-text">Nhạc nền</span>';
+            }
+            
+            console.log('🎵 Button updated - showing playing:', actuallyPlaying);
+        }
+    }
+
+    // Gallery System
+    let slideIndex = 1;
+    let autoplayInterval;
+
+    function initGallery() {
+        showSlide(slideIndex);
+        startAutoplay();
+    }
+
+    function showSlide(n) {
+        const slides = document.getElementsByClassName('slide');
+        const indicators = document.getElementsByClassName('indicator');
+        const thumbnails = document.getElementsByClassName('thumbnail');
+        
+        if (n > slides.length) slideIndex = 1;
+        if (n < 1) slideIndex = slides.length;
+        
+        // Hide all slides
+        for (let i = 0; i < slides.length; i++) {
+            slides[i].classList.remove('active');
+        }
+        
+        // Remove active from indicators
+        for (let i = 0; i < indicators.length; i++) {
+            indicators[i].classList.remove('active');
+        }
+        
+        // Remove active from thumbnails
+        for (let i = 0; i < thumbnails.length; i++) {
+            thumbnails[i].classList.remove('active');
+        }
+        
+        // Show current slide
+        if (slides[slideIndex - 1]) {
+            slides[slideIndex - 1].classList.add('active');
+        }
+        
+        if (indicators[slideIndex - 1]) {
+            indicators[slideIndex - 1].classList.add('active');
+        }
+        
+        if (thumbnails[slideIndex - 1]) {
+            thumbnails[slideIndex - 1].classList.add('active');
+        }
+    }
+
+    function startAutoplay() {
+        autoplayInterval = setInterval(() => {
+            slideIndex++;
+            showSlide(slideIndex);
+        }, 3000);
+    }
+
+    function stopAutoplay() {
+        clearInterval(autoplayInterval);
+    }
+
+    function restartAutoplay() {
+        stopAutoplay();
+        startAutoplay();
+    }
+
+    // Global functions for HTML onclick
+    window.changeSlide = function(n) {
+        slideIndex += n;
+        showSlide(slideIndex);
+        restartAutoplay();
+    };
+
+    window.currentSlide = function(n) {
+        slideIndex = n;
+        showSlide(slideIndex);
+        restartAutoplay();
+    };
+
+    // RSVP Form
+    function initRSVPForm() {
+        const rsvpForm = document.getElementById('rsvpForm');
+        const attendanceRadios = document.querySelectorAll('input[name="attendance"]');
+        const guestCountGroup = document.getElementById('guestCountGroup');
+        const mealPreferenceGroup = document.getElementById('mealPreferenceGroup');
+        const rsvpSuccess = document.getElementById('rsvpSuccess');
+
+        // Show/hide form sections based on attendance choice
+        attendanceRadios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                if (this.value === 'yes') {
+                    if (guestCountGroup) guestCountGroup.style.display = 'block';
+                    if (mealPreferenceGroup) mealPreferenceGroup.style.display = 'block';
+                    
+                    document.querySelectorAll('input[name="mealPreference"]').forEach(input => {
+                        input.required = true;
+                    });
+                } else {
+                    if (guestCountGroup) guestCountGroup.style.display = 'none';
+                    if (mealPreferenceGroup) mealPreferenceGroup.style.display = 'none';
+                    
+                    document.querySelectorAll('input[name="mealPreference"]').forEach(input => {
+                        input.required = false;
+                        input.checked = false;
+                    });
+                }
+            });
+        });
+
+        // Handle form submission
+        if (rsvpForm) {
+            rsvpForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Show success message
+                if (rsvpSuccess) {
+                    rsvpForm.style.display = 'none';
+                    rsvpSuccess.style.display = 'block';
+                    rsvpSuccess.style.opacity = '0';
+                    
+                    setTimeout(() => {
+                        rsvpSuccess.style.transition = 'opacity 0.5s ease';
+                        rsvpSuccess.style.opacity = '1';
+                    }, 100);
+                }
+            });
+        }
+    }
+
+    // Initialize music controls
+    function initMusicControls() {
+        const musicToggle = document.getElementById('musicToggle');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const musicMinimize = document.getElementById('musicMinimize');
+
+        if (musicToggle) {
+            musicToggle.addEventListener('click', function() {
+                console.log('🎵 Music toggle clicked');
+                
+                const audio = document.getElementById('backgroundAudio');
+                if (!audio) {
+                    console.log('❌ No audio element for toggle');
+                    return;
+                }
+
+                // Check real audio state first
+                const reallyPlaying = checkRealAudioState();
+                isMusicPlaying = reallyPlaying; // Sync our state
+                
+                console.log('🎵 Toggle clicked - real state:', reallyPlaying, 'tracked state:', isMusicPlaying);
+
+                if (reallyPlaying) {
+                    // Pause music
+                    console.log('🎵 Pausing music');
+                    audio.pause();
+                    isMusicPlaying = false;
+                    updateMusicButton(false);
+                } else {
+                    // Play music
+                    console.log('🎵 Starting music playback');
+                    
+                    // Ensure audio source is set
+                    const expectedSrc = getCurrentAudioSource();
+                    if (!audio.src || audio.src.indexOf(expectedSrc) === -1) {
+                        console.log('🎵 Setting audio source to:', expectedSrc);
+                        audio.src = expectedSrc;
+                        audio.load();
+                    }
+                    
+                    // Wait a moment for loading, then play
+                    setTimeout(() => {
+                        audio.play().then(() => {
+                            console.log('✅ Music started successfully!');
+                            isMusicPlaying = true;
+                            updateMusicButton(true);
+                        }).catch((error) => {
+                            console.log('❌ Play failed:', error);
+                            console.log('🎵 Trying with volume adjustment...');
+                            
+                            // Try with lower volume
+                            audio.volume = 0.1;
+                            audio.play().then(() => {
+                                console.log('✅ Music started with lower volume!');
+                                isMusicPlaying = true;
+                                updateMusicButton(true);
+                                // Gradually increase volume
+                                let vol = 0.1;
+                                const fadeIn = setInterval(() => {
+                                    vol += 0.05;
+                                    if (vol >= 0.3) {
+                                        audio.volume = 0.3;
+                                        clearInterval(fadeIn);
+                                    } else {
+                                        audio.volume = vol;
+                                    }
+                                }, 200);
+                            }).catch((finalError) => {
+                                console.log('❌ Final play attempt failed:', finalError);
+                                alert('Không thể phát nhạc. Vui lòng thử lại hoặc kiểm tra cài đặt trình duyệt.');
+                            });
+                        });
+                    }, 300);
+                }
+                
+                // Remove animation
+                this.style.animation = 'none';
+            });
+        }
+
+        if (volumeSlider) {
+            volumeSlider.addEventListener('input', function() {
+                const audio = document.getElementById('backgroundAudio');
+                if (audio) {
+                    audio.volume = this.value / 100;
+                }
+                
+                const volumeIcon = document.querySelector('.volume-icon');
+                if (volumeIcon) {
+                    if (this.value == 0) {
+                        volumeIcon.textContent = '🔇';
+                    } else if (this.value < 50) {
+                        volumeIcon.textContent = '🔉';
+                    } else {
+                        volumeIcon.textContent = '🔊';
+                    }
+                }
+            });
+        }
+
+        if (musicMinimize) {
+            musicMinimize.addEventListener('click', function() {
+                const musicPlayer = document.getElementById('musicPlayer');
+                if (musicPlayer) {
+                    const isMinimized = musicPlayer.classList.contains('minimized');
+                    musicPlayer.classList.toggle('minimized');
+                    this.textContent = isMinimized ? '−' : '+';
+                }
+            });
+        }
+    }
+
+    // Touch optimizations
+    function initTouchOptimizations() {
+        if ('ontouchstart' in window) {
+            document.body.classList.add('touch-device');
+            
+            const touchElements = document.querySelectorAll('button, .main-photo, .thumbnail, .time-unit');
+            touchElements.forEach(element => {
+                element.addEventListener('touchstart', function() {
+                    this.style.transform = 'scale(0.95)';
+                }, { passive: true });
+                
+                element.addEventListener('touchend', function() {
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                }, { passive: true });
+            });
+        }
+
+        // Fix viewport height
+        const setViewportHeight = () => {
+            const vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        };
+        setViewportHeight();
+        window.addEventListener('resize', setViewportHeight);
+        window.addEventListener('orientationchange', setViewportHeight);
+    }
+
+    // Advanced autoplay with multiple triggers
+    function enableAutoplayOnInteraction() {
+        let interactionDetected = false;
+        
+        const enableAutoplay = (eventType) => {
+            if (!musicInitialized && !interactionDetected) {
+                interactionDetected = true;
+                console.log(`🎵 User interaction detected (${eventType}) - enabling autoplay`);
+                
+                // Small delay to ensure interaction is processed
+                setTimeout(() => {
+                    attemptAutoplay();
+                }, 100);
+            }
+        };
+        
+        // Multiple interaction triggers
+        const events = ['click', 'touchstart', 'touchend', 'keydown', 'mousemove', 'scroll'];
+        events.forEach(event => {
+            document.addEventListener(event, () => enableAutoplay(event), { 
+                once: true, 
+                passive: true 
+            });
+        });
+        
+        // Also try on page visibility change (when user returns to tab)
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden && !musicInitialized) {
+                console.log('🎵 Page became visible - trying autoplay');
+                setTimeout(attemptAutoplay, 200);
+            }
+        });
+    }
+    
+    // Try autoplay immediately when audio context allows
+    function tryImmediateAutoplay() {
+        // Check if AudioContext is allowed (indicates user interaction)
+        try {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            if (audioContext.state === 'running') {
+                console.log('🎵 Audio context already running - trying immediate autoplay');
+                setTimeout(attemptAutoplay, 500);
+            } else {
+                audioContext.resume().then(() => {
+                    console.log('🎵 Audio context resumed - trying autoplay');
+                    setTimeout(attemptAutoplay, 200);
+                }).catch(() => {
+                    console.log('🎵 Audio context resume failed - waiting for interaction');
+                });
+            }
+        } catch (error) {
+            console.log('🎵 AudioContext not available:', error.message);
+        }
+    }
+
+    // QR Code System
+    function initQRCode() {
+        const currentUrl = window.location.href;
+        
+        // Simple QR code generation using CSS and a service
+        const qrContainer = document.getElementById('qrcode');
+        if (qrContainer) {
+            // Use a simple QR service
+            qrContainer.innerHTML = `
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(currentUrl)}" 
+                     alt="QR Code" 
+                     style="width: 180px; height: 180px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+            `;
+        }
+        
+        // Copy URL button
+        const copyBtn = document.getElementById('copyUrlBtn');
+        if (copyBtn) {
+            copyBtn.addEventListener('click', () => {
+                navigator.clipboard.writeText(currentUrl).then(() => {
+                    // Visual feedback
+                    const originalText = copyBtn.innerHTML;
+                    copyBtn.innerHTML = '<span>✅</span> Đã copy!';
+                    copyBtn.style.background = '#28a745';
+                    
+                    setTimeout(() => {
+                        copyBtn.innerHTML = originalText;
+                        copyBtn.style.background = '';
+                    }, 2000);
+                }).catch(() => {
+                    // Fallback for older browsers
+                    const textArea = document.createElement('textarea');
+                    textArea.value = currentUrl;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    
+                    copyBtn.innerHTML = '<span>✅</span> Đã copy!';
+                    setTimeout(() => {
+                        copyBtn.innerHTML = '<span>📋</span> Copy Link';
+                    }, 2000);
+                });
+            });
+        }
+        
+        // Share button
+        const shareBtn = document.getElementById('shareBtn');
+        if (shareBtn) {
+            shareBtn.addEventListener('click', () => {
+                const shareData = {
+                    title: 'Thiệp cưới Anh Khoa & Minh Nguyệt',
+                    text: '💕 Chúng tôi trân trọng mời bạn dự lễ cưới của chúng tôi!',
+                    url: currentUrl
+                };
+                
+                if (navigator.share) {
+                    navigator.share(shareData).catch(console.error);
+                } else {
+                    // Fallback: copy to clipboard
+                    const shareText = `${shareData.text}\n${shareData.url}`;
+                    navigator.clipboard.writeText(shareText).then(() => {
+                        shareBtn.innerHTML = '<span>✅</span> Đã copy!';
+                        setTimeout(() => {
+                            shareBtn.innerHTML = '<span>📤</span> Share';
+                        }, 2000);
+                    });
+                }
+            });
+        }
+    }
+
+    // Initialize everything
+    function initAll() {
+        showLoadingScreen();
+        initGallery();
+        initMusicPlayer();
+        initMusicControls();
+        initRSVPForm();
+        initQRCode();
+        initTouchOptimizations();
+        enableAutoplayOnInteraction();
+        
+        // Advanced autoplay attempts
+        tryImmediateAutoplay();
+        
+        // Start countdown
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+        
+        console.log('✅ Wedding app initialized successfully');
+    }
+
+    // Start the app
+    initAll();
+});
+
+// Additional utility functions
+window.openGoogleMaps = function() {
+    const url = 'https://www.google.com/maps/search/?api=1&query=JW+Marriott+Hotel+Saigon';
+    window.open(url, '_blank');
+};
+
+window.getDirections = function() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const url = `https://www.google.com/maps/dir/${position.coords.latitude},${position.coords.longitude}/10.7886,106.7024`;
+                window.open(url, '_blank');
+            },
+            () => {
+                const url = 'https://www.google.com/maps/dir//10.7886,106.7024';
+                window.open(url, '_blank');
+            }
+        );
+    }
+};
+
+window.shareLocation = function() {
+    const shareData = {
+        title: 'JW Marriott Hotel & Suites Saigon',
+        text: 'Địa điểm đám cưới: JW Marriott Hotel & Suites Saigon',
+        url: 'https://www.google.com/maps/search/?api=1&query=JW+Marriott+Hotel+Saigon'
+    };
+
+    if (navigator.share) {
+        navigator.share(shareData).catch(console.error);
+    } else if (navigator.clipboard) {
+        navigator.clipboard.writeText(`${shareData.text}\n${shareData.url}`);
+    }
+};

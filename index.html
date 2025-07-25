@@ -4,8 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thiệp Cưới - Minh Nguyệt & Anh Khoa</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Playfair+Display:wght@300;400;500;600&family=Open+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png?v=2">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=2">
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png?v=2">
+    <link rel="icon" type="image/png" sizes="64x64" href="/favicon-64.png?v=2">
+    <link rel="apple-touch-icon" sizes="128x128" href="/favicon-128.png?v=2">
+    <link rel="apple-touch-icon" sizes="256x256" href="/favicon-256.png?v=2">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Great+Vibes&family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;500;600;700&subset=latin,vietnamese&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Skip navigation for screen readers -->
@@ -20,7 +30,7 @@
                 <div class="loading-ring"></div>
             </div>
             <div class="loading-text">
-                <h2>💕 Minh Nguyệt & Anh Khoa 💕</h2>
+                <h2>💕 Anh Khoa & Minh Nguyệt 💕</h2>
                 <p>Đang tải thiệp cưới...</p>
             </div>
         </div>
@@ -31,27 +41,23 @@
         <main id="main-content">
         <section class="hero-section" aria-label="Thông tin cơ bản về đám cưới">
             <div class="couple-photo">
-                <img src="PNG/main.jpeg" alt="Minh Nguyệt & Anh Khoa" class="main-photo">
+                <img src="images/main/hero-image.jpeg" alt="Minh Nguyệt & Anh Khoa" class="main-photo">
             </div>
             <div class="couple-names">
                 <div class="initials">
-                    <span class="letter-k">K</span>
-                    <div class="branch-divider">
-                        <svg width="60" height="80" viewBox="0 0 60 80">
-                            <path d="M30 10 L30 70 M20 25 L40 25 M25 40 L35 40 M22 55 L38 55" stroke="#B8956A" stroke-width="1.5" fill="none"/>
-                        </svg>
+                    <div class="kn-monogram">
+                        <img src="assets/kn-uniform.png" alt="K & N" class="kn-logo" style="width: 180px !important; max-width: 180px !important;" />
                     </div>
-                    <span class="letter-n">N</span>
                 </div>
                 <div class="full-names">
-                    <h1>MINH NGUYỆT</h1>
-                    <div class="heart">♥</div>
                     <h1>ANH KHOA</h1>
+                    <div class="heart">♥</div>
+                    <h1>MINH NGUYỆT</h1>
                 </div>
             </div>
             <div class="invitation-text">
                 <p class="honor-text">Trân trọng kính mời:</p>
-                <div class="guest-name">............Mọi Người............</div>
+                <div class="guest-name">............Quý khách............</div>
             </div>
         </section>
 
@@ -90,8 +96,8 @@
                     <div class="parent-line">
                         <span class="title">Nhà Gái</span>
                         <div class="parent-names">
-                            <p>ÔNG: ĐOÀN QUANG TÚ</p>
-                            <p>BÀ: TRẦN THỊ HOA NI</p>
+                            <p>ÔNG: ĐOÀN QUANG THỌ</p>
+                            <p>BÀ: TRẦN THỊ HOA XIM</p>
                         </div>
                     </div>
                     <div class="parent-line">
@@ -105,16 +111,11 @@
                 
                 <div class="main-invitation">
                     <div class="branch-decoration">
-                        <svg width="100" height="40" viewBox="0 0 100 40">
-                            <path d="M10 20 Q50 10 90 20 Q50 30 10 20" stroke="#B8956A" stroke-width="1" fill="none"/>
-                            <circle cx="25" cy="18" r="1" fill="#B8956A"/>
-                            <circle cx="50" cy="15" r="1" fill="#B8956A"/>
-                            <circle cx="75" cy="18" r="1" fill="#B8956A"/>
-                        </svg>
+                        <img src="assets/brown-floral-divider.png" alt="Hoa văn trang trí" class="floral-divider-img" />
                     </div>
                     
                     <h2>GIA ĐÌNH CHÚNG TÔI TRÂN TRỌNG KÍNH MỜI</h2>
-                    <div class="guest-line">............Mọi Người............</div>
+                    <div class="guest-line">............Quý khách............</div>
                     <p class="ceremony-text">TỚI DỰ TIỆC MỪNG LỄ THÀNH HÔN CỦA HAI CON CHÚNG TÔI</p>
                     
                     <div class="couple-names-formal">
@@ -129,8 +130,14 @@
                     </div>
                     
                     <div class="venue-info">
-                        <h3>TẠI: JW MARIOTT HOTEL & SUITES SAIGON</h3>
-                        <p class="address">Nút Giao Hai Bà Trưng Và Lê Duẩn, Phường Bến Nghé, Quận 1</p>
+                        <h3 class="venue-title">TẠI: JW MARRIOTT HOTEL &amp; SUITES SAIGON</h3>
+                        <p class="address">Nút Giao Hai Bà Trưng Và Lê Duẩn</p>
+                        <p class="address-detail">Phường Bến Nghé, Quận 1, TP.HCM</p>
+                        <div class="map-link">
+                            <a href="https://maps.app.goo.gl/yP1EtWGmJK69hFSi6" target="_blank" class="map-button">
+                                📍 Xem bản đồ
+                            </a>
+                        </div>
                         
                         <!-- Map Section -->
                         <div class="map-section">
@@ -140,7 +147,7 @@
                                     <div class="map-overlay">
                                         <div class="map-pin">📍</div>
                                         <div class="map-info">
-                                            <h5>JW Mariott Hotel & Suites Saigon</h5>
+                                            <h5>JW Marriott Hotel &amp; Suites Saigon</h5>
                                             <p>Nút Giao Hai Bà Trưng Và Lê Duẩn<br>Phường Bến Nghé, Quận 1, TP.HCM</p>
                                         </div>
                                     </div>
@@ -160,30 +167,6 @@
                                 </div>
                             </div>
                             
-                            <!-- Additional Info -->
-                            <div class="venue-details">
-                                <div class="detail-item">
-                                    <span class="detail-icon">🚗</span>
-                                    <div class="detail-content">
-                                        <h6>Đỗ xe</h6>
-                                        <p>Có bãi đỗ xe miễn phí cho khách mời</p>
-                                    </div>
-                                </div>
-                                <div class="detail-item">
-                                    <span class="detail-icon">🚌</span>
-                                    <div class="detail-content">
-                                        <h6>Phương tiện công cộng</h6>
-                                        <p>Ga Metro Bến Thành cách 500m</p>
-                                    </div>
-                                </div>
-                                <div class="detail-item">
-                                    <span class="detail-icon">📞</span>
-                                    <div class="detail-content">
-                                        <h6>Liên hệ khách sạn</h6>
-                                        <p>+84 28 3822 9999</p>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -199,34 +182,162 @@
                 <!-- Main Slideshow -->
                 <div class="slideshow-container">
                     <div class="slide active">
-                        <img src="PNG/main.jpeg" alt="Ảnh cưới chính" class="slide-image">
+                        <img src="images/gallery/0V3A9252.jpeg" alt="Pre-wedding 1" class="slide-image">
                         <div class="slide-caption">
-                            <h3>Ngày trọng đại</h3>
-                            <p>Khoảnh khắc hạnh phúc nhất của chúng tôi</p>
+                            <h3>Khoảnh khắc đầu tiên</h3>
+                            <p>Nơi tình yêu chúng ta bắt đầu nở hoa</p>
                         </div>
                     </div>
                     
                     <div class="slide">
-                        <img src="PNG/3E012091-8813-46C1-B83D-9B22070C7DBA_1_105_c.jpeg" alt="Monogram" class="slide-image">
+                        <img src="images/gallery/0V3A9194.JPG" alt="Pre-wedding 2" class="slide-image">
                         <div class="slide-caption">
-                            <h3>K ♥ N</h3>
-                            <p>Monogram đặc biệt của chúng tôi</p>
+                            <h3>Nụ cười tỏa nắng</h3>
+                            <p>Hạnh phúc tỏa ra từ từng cử chỉ</p>
                         </div>
                     </div>
                     
                     <div class="slide">
-                        <img src="PNG/8F82AA49-34D7-4083-BAB0-DF5A48E8862C.jpeg" alt="Timeline cưới" class="slide-image">
+                        <img src="images/gallery/0V3A9375.jpg" alt="Pre-wedding 3" class="slide-image">
                         <div class="slide-caption">
-                            <h3>Lịch trình đám cưới</h3>
-                            <p>Từng khoảnh khắc trong ngày cưới</p>
+                            <h3>Hoàng hôn vàng</h3>
+                            <p>Ánh hoàng hôn chứng kiến lời thề nguyền</p>
                         </div>
                     </div>
                     
                     <div class="slide">
-                        <img src="PNG/C173D807-05A3-4F9C-A7E8-80F7887D5512.jpeg" alt="Thiệp mời" class="slide-image">
+                        <img src="images/gallery/DJI_0142.jpeg" alt="Pre-wedding 4" class="slide-image">
                         <div class="slide-caption">
-                            <h3>Thiệp mời chính thức</h3>
-                            <p>Lời mời trân trọng đến gia đình và bạn bè</p>
+                            <h3>Toàn cảnh thiên nhiên</h3>
+                            <p>Tình yêu chúng ta giữa đất trời bao la</p>
+                        </div>
+                    </div>
+                    
+                    <div class="slide">
+                        <img src="images/gallery/NTK_3273.jpg" alt="Pre-wedding 5" class="slide-image">
+                        <div class="slide-caption">
+                            <h3>Phong cách vintage</h3>
+                            <p>Vẻ đẹp cổ điển của tình yêu bất diệt</p>
+                        </div>
+                    </div>
+                    
+                    <div class="slide">
+                        <img src="images/gallery/0V3A9285.JPG" alt="Pre-wedding 6" class="slide-image">
+                        <div class="slide-caption">
+                            <h3>Khoảnh khắc ngọt ngào</h3>
+                            <p>Những giây phút nhẹ nhàng bên nhau</p>
+                        </div>
+                    </div>
+                    
+                    <div class="slide">
+                        <img src="images/gallery/0V3A9304.JPG" alt="Pre-wedding 7" class="slide-image">
+                        <div class="slide-caption">
+                            <h3>Tình yêu rạng rỡ</h3>
+                            <p>Ánh sáng tình yêu chiếu sáng mọi khoảnh khắc</p>
+                        </div>
+                    </div>
+                    
+                    <div class="slide">
+                        <img src="images/gallery/0V3A9334.JPG" alt="Pre-wedding 8" class="slide-image">
+                        <div class="slide-caption">
+                            <h3>Cặp đôi hoàn hảo</h3>
+                            <p>Hai con người được sinh ra dành cho nhau</p>
+                        </div>
+                    </div>
+                    
+                    <div class="slide">
+                        <img src="images/gallery/0V3A9365.jpg" alt="Pre-wedding 9" class="slide-image">
+                        <div class="slide-caption">
+                            <h3>Giây phút lãng mạn</h3>
+                            <p>Khi thời gian như ngừng trôi</p>
+                        </div>
+                    </div>
+                    
+                    <div class="slide">
+                        <img src="images/gallery/0V3A9396.JPG" alt="Pre-wedding 10" class="slide-image">
+                        <div class="slide-caption">
+                            <h3>Nét đẹp tự nhiên</h3>
+                            <p>Vẻ đẹp tự nhiên của tình yêu chân thành</p>
+                        </div>
+                    </div>
+                    
+                    <div class="slide">
+                        <img src="images/gallery/0V3A9428.JPG" alt="Pre-wedding 11" class="slide-image">
+                        <div class="slide-caption">
+                            <h3>Khoảnh khắc ôm ấp</h3>
+                            <p>Trong vòng tay nhau, cả thế giới như dừng lại</p>
+                        </div>
+                    </div>
+                    
+                    <div class="slide">
+                        <img src="images/gallery/0V3A9480.JPG" alt="Pre-wedding 12" class="slide-image">
+                        <div class="slide-caption">
+                            <h3>Hạnh phúc tràn ngập</h3>
+                            <p>Niềm vui từ tận sâu trái tim</p>
+                        </div>
+                    </div>
+                    
+                    <div class="slide">
+                        <img src="images/gallery/0V3A9515.JPG" alt="Pre-wedding 13" class="slide-image">
+                        <div class="slide-caption">
+                            <h3>Phong cách hiện đại</h3>
+                            <p>Tình yêu thời đại mới</p>
+                        </div>
+                    </div>
+                    
+                    <div class="slide">
+                        <img src="images/gallery/0V3A9549.JPG" alt="Pre-wedding 14" class="slide-image">
+                        <div class="slide-caption">
+                            <h3>Moments đáng nhớ</h3>
+                            <p>Những khoảnh khắc khó quên</p>
+                        </div>
+                    </div>
+                    
+                    <div class="slide">
+                        <img src="images/gallery/0V3A9573.JPG" alt="Pre-wedding 15" class="slide-image">
+                        <div class="slide-caption">
+                            <h3>Tình yêu thuần khiết</h3>
+                            <p>Sự trong sáng của tình yêu đích thực</p>
+                        </div>
+                    </div>
+                    
+                    <div class="slide">
+                        <img src="images/gallery/0V3A9687.JPG" alt="Pre-wedding 16" class="slide-image">
+                        <div class="slide-caption">
+                            <h3>Khoảnh khắc đặc biệt</h3>
+                            <p>Những giây phút chỉ dành riêng cho nhau</p>
+                        </div>
+                    </div>
+                    
+                    <div class="slide">
+                        <img src="images/gallery/NTK_3389.jpg" alt="Pre-wedding 17" class="slide-image">
+                        <div class="slide-caption">
+                            <h3>Studio chuyên nghiệp</h3>
+                            <p>Nghệ thuật chụp ảnh cưới đẳng cấp</p>
+                        </div>
+                    </div>
+                    
+                    <div class="slide">
+                        <img src="images/gallery/NTK_4567.jpg" alt="Pre-wedding 18" class="slide-image">
+                        <div class="slide-caption">
+                            <h3>Phong cách thời trang</h3>
+                            <p>Sự kết hợp hoàn hảo giữa tình yêu và phong cách</p>
+                        </div>
+                    </div>
+                    
+                    <div class="slide">
+                        <img src="images/gallery/NTK_4792.jpg" alt="Pre-wedding 19" class="slide-image">
+                        <div class="slide-caption">
+                            <h3>Ánh mắt yêu thương</h3>
+                            <p>Tình yêu thầm lặng qua từng ánh nhìn</p>
+                        </div>
+                    </div>
+                    
+                    <div class="slide">
+                        <img src="images/gallery/album-cover.jpeg" alt="Pre-wedding 20" class="slide-image">
+                        <div class="slide-caption">
+                            <h3>Kỷ niệm vĩnh cửu</h3>
+                            <p>Album tình yêu của hai trái tim</p>
                         </div>
                     </div>
                     
@@ -240,60 +351,164 @@
                         <span class="indicator" onclick="currentSlide(2)"></span>
                         <span class="indicator" onclick="currentSlide(3)"></span>
                         <span class="indicator" onclick="currentSlide(4)"></span>
+                        <span class="indicator" onclick="currentSlide(5)"></span>
+                        <span class="indicator" onclick="currentSlide(6)"></span>
+                        <span class="indicator" onclick="currentSlide(7)"></span>
+                        <span class="indicator" onclick="currentSlide(8)"></span>
+                        <span class="indicator" onclick="currentSlide(9)"></span>
+                        <span class="indicator" onclick="currentSlide(10)"></span>
+                        <span class="indicator" onclick="currentSlide(11)"></span>
+                        <span class="indicator" onclick="currentSlide(12)"></span>
+                        <span class="indicator" onclick="currentSlide(13)"></span>
+                        <span class="indicator" onclick="currentSlide(14)"></span>
+                        <span class="indicator" onclick="currentSlide(15)"></span>
+                        <span class="indicator" onclick="currentSlide(16)"></span>
+                        <span class="indicator" onclick="currentSlide(17)"></span>
+                        <span class="indicator" onclick="currentSlide(18)"></span>
+                        <span class="indicator" onclick="currentSlide(19)"></span>
+                        <span class="indicator" onclick="currentSlide(20)"></span>
                     </div>
                 </div>
                 
                 <!-- Thumbnail Gallery -->
                 <div class="thumbnail-gallery">
-                    <h3>Album ảnh</h3>
+                    <h3>Album ảnh Pre-wedding</h3>
                     <div class="thumbnails">
                         <div class="thumbnail active" onclick="currentSlide(1)">
-                            <img src="PNG/main.jpeg" alt="Thumbnail 1">
+                            <img src="images/gallery/0V3A9252.jpeg" alt="Thumbnail 1">
                             <div class="thumbnail-overlay">
-                                <span>Ảnh cưới</span>
+                                <span>Khởi đầu</span>
                             </div>
                         </div>
                         <div class="thumbnail" onclick="currentSlide(2)">
-                            <img src="PNG/3E012091-8813-46C1-B83D-9B22070C7DBA_1_105_c.jpeg" alt="Thumbnail 2">
+                            <img src="images/gallery/0V3A9194.JPG" alt="Thumbnail 2">
                             <div class="thumbnail-overlay">
-                                <span>Monogram</span>
+                                <span>Nụ cười</span>
                             </div>
                         </div>
                         <div class="thumbnail" onclick="currentSlide(3)">
-                            <img src="PNG/8F82AA49-34D7-4083-BAB0-DF5A48E8862C.jpeg" alt="Thumbnail 3">
+                            <img src="images/gallery/0V3A9375.jpg" alt="Thumbnail 3">
                             <div class="thumbnail-overlay">
-                                <span>Timeline</span>
+                                <span>Hoàng hôn</span>
                             </div>
                         </div>
                         <div class="thumbnail" onclick="currentSlide(4)">
-                            <img src="PNG/C173D807-05A3-4F9C-A7E8-80F7887D5512.jpeg" alt="Thumbnail 4">
+                            <img src="images/gallery/DJI_0142.jpeg" alt="Thumbnail 4">
                             <div class="thumbnail-overlay">
-                                <span>Thiệp mời</span>
+                                <span>Drone</span>
+                            </div>
+                        </div>
+                        <div class="thumbnail" onclick="currentSlide(5)">
+                            <img src="images/gallery/NTK_3273.jpg" alt="Thumbnail 5">
+                            <div class="thumbnail-overlay">
+                                <span>Vintage</span>
+                            </div>
+                        </div>
+                        <div class="thumbnail" onclick="currentSlide(6)">
+                            <img src="images/gallery/0V3A9285.JPG" alt="Thumbnail 6">
+                            <div class="thumbnail-overlay">
+                                <span>Ngọt ngào</span>
+                            </div>
+                        </div>
+                        <div class="thumbnail" onclick="currentSlide(7)">
+                            <img src="images/gallery/0V3A9304.JPG" alt="Thumbnail 7">
+                            <div class="thumbnail-overlay">
+                                <span>Rạng rỡ</span>
+                            </div>
+                        </div>
+                        <div class="thumbnail" onclick="currentSlide(8)">
+                            <img src="images/gallery/0V3A9334.JPG" alt="Thumbnail 8">
+                            <div class="thumbnail-overlay">
+                                <span>Hoàn hảo</span>
+                            </div>
+                        </div>
+                        <div class="thumbnail" onclick="currentSlide(9)">
+                            <img src="images/gallery/0V3A9365.jpg" alt="Thumbnail 9">
+                            <div class="thumbnail-overlay">
+                                <span>Lãng mạn</span>
+                            </div>
+                        </div>
+                        <div class="thumbnail" onclick="currentSlide(10)">
+                            <img src="images/gallery/0V3A9396.JPG" alt="Thumbnail 10">
+                            <div class="thumbnail-overlay">
+                                <span>Tự nhiên</span>
+                            </div>
+                        </div>
+                        <div class="thumbnail" onclick="currentSlide(11)">
+                            <img src="images/gallery/0V3A9428.JPG" alt="Thumbnail 11">
+                            <div class="thumbnail-overlay">
+                                <span>Ôm ấp</span>
+                            </div>
+                        </div>
+                        <div class="thumbnail" onclick="currentSlide(12)">
+                            <img src="images/gallery/0V3A9480.JPG" alt="Thumbnail 12">
+                            <div class="thumbnail-overlay">
+                                <span>Hạnh phúc</span>
+                            </div>
+                        </div>
+                        <div class="thumbnail" onclick="currentSlide(13)">
+                            <img src="images/gallery/0V3A9515.JPG" alt="Thumbnail 13">
+                            <div class="thumbnail-overlay">
+                                <span>Hiện đại</span>
+                            </div>
+                        </div>
+                        <div class="thumbnail" onclick="currentSlide(14)">
+                            <img src="images/gallery/0V3A9549.JPG" alt="Thumbnail 14">
+                            <div class="thumbnail-overlay">
+                                <span>Moments</span>
+                            </div>
+                        </div>
+                        <div class="thumbnail" onclick="currentSlide(15)">
+                            <img src="images/gallery/0V3A9573.JPG" alt="Thumbnail 15">
+                            <div class="thumbnail-overlay">
+                                <span>Thuần khiết</span>
+                            </div>
+                        </div>
+                        <div class="thumbnail" onclick="currentSlide(16)">
+                            <img src="images/gallery/0V3A9687.JPG" alt="Thumbnail 16">
+                            <div class="thumbnail-overlay">
+                                <span>Đặc biệt</span>
+                            </div>
+                        </div>
+                        <div class="thumbnail" onclick="currentSlide(17)">
+                            <img src="images/gallery/NTK_3389.jpg" alt="Thumbnail 17">
+                            <div class="thumbnail-overlay">
+                                <span>Studio</span>
+                            </div>
+                        </div>
+                        <div class="thumbnail" onclick="currentSlide(18)">
+                            <img src="images/gallery/NTK_4567.jpg" alt="Thumbnail 18">
+                            <div class="thumbnail-overlay">
+                                <span>Fashion</span>
+                            </div>
+                        </div>
+                        <div class="thumbnail" onclick="currentSlide(19)">
+                            <img src="images/gallery/NTK_4792.jpg" alt="Thumbnail 19">
+                            <div class="thumbnail-overlay">
+                                <span>Ánh mắt</span>
+                            </div>
+                        </div>
+                        <div class="thumbnail" onclick="currentSlide(20)">
+                            <img src="images/gallery/album-cover.jpeg" alt="Thumbnail 20">
+                            <div class="thumbnail-overlay">
+                                <span>Album</span>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Auto-play controls -->
-                <div class="gallery-controls">
-                    <button class="control-btn" id="playPauseBtn" onclick="toggleAutoplay()">
-                        <span id="playIcon">⏸️</span> Tạm dừng
-                    </button>
-                    <div class="speed-control">
-                        <label>Tốc độ: </label>
-                        <select id="speedSelect" onchange="changeSpeed()">
-                            <option value="5000">Chậm (5s)</option>
-                            <option value="3000" selected>Bình thường (3s)</option>
-                            <option value="1500">Nhanh (1.5s)</option>
-                        </select>
-                    </div>
-                </div>
             </div>
         </section>
 
         <!-- Timeline Section -->
         <section class="timeline-section">
-            <h2 class="timeline-title">KHOA and NGUYỆT</h2>
+            <h2 class="timeline-title">
+                <div class="timeline-text-wrapper">
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;KHOA</span>
+                    <span class="heart-connector">♥</span>
+                    <span>NGUYỆT</span>
+                </div>
+            </h2>
             <div class="timeline-subtitle">Wedding Timeline</div>
             
             <div class="timeline">
@@ -302,7 +517,7 @@
                     <div class="timeline-dot"></div>
                     <div class="event">
                         <div class="event-name">Đón khách</div>
-                        <div class="event-icon">🎭</div>
+                        <div class="event-icon">🌺</div>
                     </div>
                 </div>
                 
@@ -311,7 +526,7 @@
                     <div class="timeline-dot"></div>
                     <div class="event">
                         <div class="event-name">Cử hành lễ</div>
-                        <div class="event-icon">💒</div>
+                        <div class="event-icon">💐</div>
                     </div>
                 </div>
                 
@@ -320,7 +535,7 @@
                     <div class="timeline-dot"></div>
                     <div class="event">
                         <div class="event-name">Tiệc tối</div>
-                        <div class="event-icon">🍽️</div>
+                        <div class="event-icon">🥂</div>
                     </div>
                 </div>
                 
@@ -329,7 +544,7 @@
                     <div class="timeline-dot"></div>
                     <div class="event">
                         <div class="event-name">Music & Game show</div>
-                        <div class="event-icon">🎵</div>
+                        <div class="event-icon">✨</div>
                     </div>
                 </div>
             </div>
@@ -337,11 +552,12 @@
             <div class="dresscode">
                 <h3>Dresscode</h3>
                 <div class="color-palette">
-                    <div class="color-dot" style="background-color: #D4A574;"></div>
-                    <div class="color-dot" style="background-color: #E6D7C3;"></div>
-                    <div class="color-dot" style="background-color: #C4A37A;"></div>
-                    <div class="color-dot" style="background-color: #8B4513;"></div>
-                    <div class="color-dot" style="background-color: #2C2C2C;"></div>
+                    <div class="color-dot" style="background-color: #D4827A;"></div>
+                    <div class="color-dot" style="background-color: #B5A8B0;"></div>
+                    <div class="color-dot" style="background-color: #B89081;"></div>
+                    <div class="color-dot" style="background-color: #E8C79F;"></div>
+                    <div class="color-dot" style="background-color: #8B5A2B;"></div>
+                    <div class="color-dot" style="background-color: #2B2B2B;"></div>
                 </div>
             </div>
         </section>
@@ -352,7 +568,11 @@
                 <h2 class="rsvp-title">Xác nhận tham dự</h2>
                 <p class="rsvp-subtitle">Vui lòng cho chúng tôi biết bạn có thể tham dự không</p>
                 
-                <form class="rsvp-form" id="rsvpForm">
+                <form class="rsvp-form" id="rsvpForm" name="wedding-rsvp" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
+                    <!-- Hidden fields for form processing -->
+                    <input type="hidden" name="bot-field" />
+                    <input type="hidden" name="form-name" value="wedding-rsvp" />
+                    
                     <div class="form-group">
                         <label for="guestName">Họ và tên *</label>
                         <input type="text" id="guestName" name="guestName" required placeholder="Nhập họ tên của bạn">
@@ -562,45 +782,51 @@
         <section class="qr-section">
             <div class="qr-container">
                 <h2 class="qr-title">Chia sẻ thiệp cưới</h2>
-                <p class="qr-subtitle">Quét mã QR để chia sẻ thiệp cưới với bạn bè</p>
                 
                 <div class="qr-card">
                     <div class="qr-code-container">
-                        <canvas id="qrcode" width="200" height="200"></canvas>
+                        <div id="qrcode"></div>
                         <div class="qr-overlay">
                             <span class="qr-heart">💕</span>
                         </div>
                     </div>
                     
-                    <div class="qr-info">
-                        <p class="qr-url" id="currentUrl">Loading...</p>
-                        <div class="qr-actions">
-                            <button class="qr-btn" id="copyUrlBtn">
-                                <span>📋</span> Copy Link
-                            </button>
-                            <button class="qr-btn" id="shareBtn">
-                                <span>📤</span> Share
-                            </button>
-                            <button class="qr-btn" id="downloadQrBtn">
-                                <span>💾</span> Tải QR
-                            </button>
-                        </div>
+                    <div class="qr-actions">
+                        <button class="qr-btn" id="copyUrlBtn">
+                            <span>📋</span> Copy Link
+                        </button>
+                        <button class="qr-btn" id="shareBtn">
+                            <span>📤</span> Share
+                        </button>
                     </div>
-                </div>
-                
-                <div class="share-message">
-                    <p>💌 Gửi link này cho bạn bè để họ có thể xem thiệp cưới online</p>
                 </div>
             </div>
         </section>
 
         <!-- Footer -->
         <footer class="invitation-footer">
+            <div class="footer-ornament">
+                <div class="ornament-line"></div>
+                <div class="footer-heart">💕</div>
+                <div class="ornament-line"></div>
+            </div>
+            
             <div class="thank-you">
-                <p>Sự hiện diện của quý khách là niềm vinh hạnh cho gia đình chúng tôi</p>
-                <div class="signature">
-                    <p>Trân trọng,</p>
-                    <p>Gia đình Minh Nguyệt & Anh Khoa</p>
+                <p class="gratitude-text">Sự hiện diện của quý khách là niềm vinh hạnh cho gia đình chúng tôi</p>
+                
+                <div class="signature-section">
+                    <div class="signature-ornament">❦</div>
+                    <p class="signature-regards">Trân trọng,</p>
+                    <p class="signature-names">Gia đình Anh Khoa & Minh Nguyệt</p>
+                    <div class="signature-date">27 • 07 • 2025</div>
+                </div>
+            </div>
+            
+            <div class="footer-decoration">
+                <div class="decoration-flourish">
+                    <span class="flourish-left">❦</span>
+                    <span class="flourish-center">✦</span>
+                    <span class="flourish-right">❦</span>
                 </div>
             </div>
         </footer>
@@ -633,14 +859,43 @@
         <button class="music-minimize" id="musicMinimize">−</button>
     </div>
 
-    <!-- Audio element (hidden) -->
-    <audio id="backgroundAudio" loop>
-        <!-- Using a placeholder for wedding music - replace with actual audio file -->
-        <source src="https://www.soundjay.com/misc/sounds-986.mp3" type="audio/mpeg">
-        <!-- Fallback: You can add your own audio file here -->
-        <!-- <source src="music/wedding-song.mp3" type="audio/mpeg"> -->
+    <!-- Music Playlist Player -->
+    <audio id="backgroundAudio" style="display: none;" preload="auto" loop>
+        <p>Your browser doesn't support audio playback.</p>
     </audio>
 
-    <script src="script.js"></script>
+    <script src="js/wedding-fixed.js"></script>
+
+    <script>
+    (function() {
+        let lastModified = 0;
+        let isReloading = false;
+        
+        function checkForReload() {
+            if (isReloading) return;
+            
+            fetch('/live-reload-check')
+                .then(response => response.text())
+                .then(timestamp => {
+                    const currentTimestamp = parseInt(timestamp);
+                    if (lastModified > 0 && currentTimestamp > lastModified) {
+                        console.log('🔄 File changed - reloading in 1 second...');
+                        isReloading = true;
+                        setTimeout(() => {
+                            location.reload();
+                        }, 1000);
+                    }
+                    lastModified = currentTimestamp;
+                })
+                .catch(() => {});
+        }
+        
+        // Check every 2 seconds instead of 1
+        setInterval(checkForReload, 2000);
+        
+        console.log('📡 Live reload active - checking every 2 seconds...');
+    })();
+    </script>
+    
 </body>
 </html>
