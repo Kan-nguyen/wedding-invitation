@@ -34,16 +34,12 @@ Beautiful, responsive wedding invitation website with background music, photo ga
 ## 📁 **File Structure**
 ```
 ├── index.html              # Main page
-├── css/style.css           # Styles (optimized)
+├── css/style.css           # Styles (68KB, optimized)
 ├── js/wedding-fixed.js     # JavaScript (clean architecture)
 ├── music/                  # Background music (MP3/MP4)
-├── images/                 # Wedding photos and gallery
-│   ├── main/              # Hero and portrait images
-│   └── gallery/           # Photo slideshow (47 images)
+├── PNG/                    # Images and photo gallery
 ├── assets/                 # Icons and decorative elements
-├── docs/                   # Documentation
-├── dev-tools/             # Development utilities
-└── backup/                # Backup files
+└── docs/                   # Documentation
 ```
 
 ## 🎵 **Music Setup**
@@ -53,11 +49,10 @@ Beautiful, responsive wedding invitation website with background music, photo ga
 - **Add songs**: Place files in `music/` folder and update array in JS
 
 ## 🖼️ **Photo Gallery**
-- **Location**: `images/gallery/` directory (47 photos)
+- **Location**: `PNG/Slides/` directory
 - **Format**: JPG/JPEG images
 - **Auto-detection**: Automatically includes all images
 - **Optimization**: Lazy loading for performance
-- **Message Wall**: Real-time wedding wishes display
 
 ## 🚀 **Deployment**
 1. **Static hosting**: Upload all files to web server
@@ -71,7 +66,7 @@ Beautiful, responsive wedding invitation website with background music, photo ga
 - **Names**: Update in `index.html`
 - **Date/Time**: Modify countdown target in JS
 - **Venue**: Update address and map coordinates
-- **Photos**: Replace images in `images/gallery/`
+- **Photos**: Replace images in `PNG/Slides/`
 
 ### **Styling**
 - **Colors**: Modify CSS custom properties

@@ -550,7 +550,7 @@ document.addEventListener('DOMContentLoaded', function() {
         restartAutoplay();
     };
 
-    // RSVP Form with Enhanced Database Tracking
+    // RSVP Form
     function initRSVPForm() {
         const rsvpForm = document.getElementById('rsvpForm');
         const attendanceRadios = document.querySelectorAll('input[name="attendance"]');
@@ -592,46 +592,22 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
 
-        // Handle form submission with database tracking
+        // Handle form submission
         if (rsvpForm) {
             rsvpForm.addEventListener('submit', function(e) {
-                // Update submission time right before submit
-                if (submissionTimeField) {
-                    submissionTimeField.value = new Date().toISOString();
+                e.preventDefault();
+                
+                // Show success message
+                if (rsvpSuccess) {
+                    rsvpForm.style.display = 'none';
+                    rsvpSuccess.style.display = 'block';
+                    rsvpSuccess.style.opacity = '0';
+                    
+                    setTimeout(() => {
+                        rsvpSuccess.style.transition = 'opacity 0.5s ease';
+                        rsvpSuccess.style.opacity = '1';
+                    }, 100);
                 }
-                
-                // Collect form data for logging
-                const formData = new FormData(rsvpForm);
-                const rsvpData = {
-                    name: formData.get('guestName'),
-                    phone: formData.get('guestPhone'),
-                    email: formData.get('guestEmail'),
-                    relationship: formData.get('relationship'),
-                    attendance: formData.get('attendance'),
-                    guestCount: formData.get('guestCount'),
-                    mealPreference: formData.get('mealPreference'),
-                    specialRequests: formData.get('specialRequests'),
-                    message: formData.get('message'),
-                    submissionTime: formData.get('submission-time'),
-                    source: 'wedding-website'
-                };
-                
-                console.log('📝 RSVP Submitted:', rsvpData);
-                
-                // Store in localStorage for backup
-                const existingRSVPs = JSON.parse(localStorage.getItem('weddingRSVPs') || '[]');
-                existingRSVPs.push(rsvpData);
-                localStorage.setItem('weddingRSVPs', JSON.stringify(existingRSVPs));
-                
-                // Show loading state
-                const submitBtn = rsvpForm.querySelector('.rsvp-submit-btn');
-                if (submitBtn) {
-                    submitBtn.innerHTML = '<span class="btn-text">Đang gửi...</span><span class="btn-icon">⏳</span>';
-                    submitBtn.disabled = true;
-                }
-                
-                // Let form submit naturally to external service
-                // Success handling will be done by the external service or page redirect
             });
         }
     }
@@ -1094,339 +1070,18 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Message Wall System
-    let messageWallData = {
-        messages: [],
-        lastUpdate: null,
-        isLoading: false,
-        updateInterval: null
-    };
-
-    function initMessageWall() {
-        console.log('💌 Initializing Message Wall...');
-        
-        // Setup event listeners
-        const refreshBtn = document.getElementById('refreshMessages');
-        const scrollToRSVPBtn = document.getElementById('scrollToRSVP');
-        
-        if (refreshBtn) {
-            refreshBtn.addEventListener('click', () => {
-                loadMessages(true);
-            });
-        }
-        
-        if (scrollToRSVPBtn) {
-            scrollToRSVPBtn.addEventListener('click', () => {
-                const rsvpSection = document.querySelector('.rsvp-section');
-                if (rsvpSection) {
-                    rsvpSection.scrollIntoView({ behavior: 'smooth' });
-                    
-                    // Focus on message textarea
-                    setTimeout(() => {
-                        const messageField = document.getElementById('message');
-                        if (messageField) {
-                            messageField.focus();
-                        }
-                    }, 800);
-                }
-            });
-        }
-        
-        // Load initial messages
-        loadMessages();
-        
-        // Setup auto-refresh every 30 seconds
-        messageWallData.updateInterval = setInterval(() => {
-            loadMessages(false, true);
-        }, 30000);
-        
-        console.log('✅ Message Wall initialized');
-    }
-    
-    function loadMessages(forceRefresh = false, silent = false) {
-        if (messageWallData.isLoading && !forceRefresh) return;
-        
-        messageWallData.isLoading = true;
-        
-        if (!silent) {
-            showLoadingState();
-        }
-        
-        const refreshBtn = document.getElementById('refreshMessages');
-        if (refreshBtn && !silent) {
-            refreshBtn.classList.add('loading');
-        }
-        
-        console.log('📥 Loading messages...');
-        
-        // For demo, we'll use multiple data sources
-        Promise.all([
-            loadMessagesFromLocalStorage(),
-            loadMessagesFromGoogleSheets(),
-            loadSampleMessages() // Fallback sample data
-        ]).then(([localMessages, sheetsMessages, sampleMessages]) => {
-            
-            // Combine and deduplicate messages
-            const allMessages = [...localMessages, ...sheetsMessages];
-            const uniqueMessages = deduplicateMessages(allMessages);
-            
-            // Use sample messages if no real messages
-            const finalMessages = uniqueMessages.length > 0 ? uniqueMessages : sampleMessages;
-            
-            messageWallData.messages = finalMessages;
-            messageWallData.lastUpdate = new Date();
-            
-            displayMessages(finalMessages);
-            
-            if (!silent && finalMessages.length > messageWallData.messages.length) {
-                showNewMessageNotification();
-            }
-            
-        }).catch(error => {
-            console.log('❌ Error loading messages:', error);
-            // Show sample messages on error
-            loadSampleMessages().then(sampleMessages => {
-                displayMessages(sampleMessages);
-            });
-        }).finally(() => {
-            messageWallData.isLoading = false;
-            
-            if (refreshBtn) {
-                refreshBtn.classList.remove('loading');
-            }
-        });
-    }
-    
-    function loadMessagesFromLocalStorage() {
-        return new Promise(resolve => {
-            try {
-                const rsvps = JSON.parse(localStorage.getItem('weddingRSVPs') || '[]');
-                const messages = rsvps
-                    .filter(rsvp => rsvp.message && rsvp.message.trim().length > 0)
-                    .map(rsvp => ({
-                        id: `local_${rsvp.name}_${rsvp.submissionTime}`,
-                        name: rsvp.name,
-                        message: rsvp.message,
-                        timestamp: new Date(rsvp.submissionTime),
-                        source: 'local'
-                    }));
-                resolve(messages);
-            } catch (error) {
-                console.log('❌ Error loading local messages:', error);
-                resolve([]);
-            }
-        });
-    }
-    
-    function loadMessagesFromGoogleSheets() {
-        return new Promise(resolve => {
-            // This would connect to Google Sheets API
-            // For now, return empty array
-            // TODO: Implement Google Sheets integration
-            resolve([]);
-        });
-    }
-    
-    function loadSampleMessages() {
-        return new Promise(resolve => {
-            const sampleMessages = [
-                {
-                    id: 'sample_1',
-                    name: 'Gia đình Nguyễn',
-                    message: 'Chúc hai bạn trăm năm hạnh phúc, sớm có em bé! Cả gia đình rất mong đợi ngày vui của hai bạn.',
-                    timestamp: new Date(Date.now() - 3600000), // 1 hour ago
-                    source: 'sample'
-                },
-                {
-                    id: 'sample_2', 
-                    name: 'Minh An',
-                    message: 'Chúc mừng Minh Nguyệt và Anh Khoa! Tình yêu của hai bạn thật đẹp, chúc hạnh phúc mãi mãi! 💕',
-                    timestamp: new Date(Date.now() - 7200000), // 2 hours ago
-                    source: 'sample'
-                },
-                {
-                    id: 'sample_3',
-                    name: 'Cô Lan Anh',
-                    message: 'Cô chúc hai con luôn hạnh phúc, yêu thương và che chở cho nhau. Gia đình nhỏ của các con sẽ luôn tràn đầy tiếng cười!',
-                    timestamp: new Date(Date.now() - 10800000), // 3 hours ago
-                    source: 'sample'
-                }
-            ];
-            resolve(sampleMessages);
-        });
-    }
-    
-    function deduplicateMessages(messages) {
-        const seen = new Set();
-        return messages.filter(message => {
-            const key = `${message.name}_${message.message}`;
-            if (seen.has(key)) {
-                return false;
-            }
-            seen.add(key);
-            return true;
-        });
-    }
-    
-    function displayMessages(messages) {
-        const loadingEl = document.querySelector('.message-loading');
-        const containerEl = document.getElementById('messagesContainer');
-        const noMessagesEl = document.getElementById('noMessages');
-        
-        // Hide loading
-        if (loadingEl) {
-            loadingEl.style.display = 'none';
-        }
-        
-        if (messages.length === 0) {
-            // Show empty state
-            if (containerEl) containerEl.style.display = 'none';
-            if (noMessagesEl) noMessagesEl.style.display = 'flex';
-            return;
-        }
-        
-        // Show messages
-        if (noMessagesEl) noMessagesEl.style.display = 'none';
-        if (containerEl) {
-            containerEl.style.display = 'grid';
-            containerEl.innerHTML = '';
-            
-            // Sort messages by timestamp (newest first)
-            const sortedMessages = messages.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-            
-            sortedMessages.forEach((message, index) => {
-                const messageEl = createMessageElement(message);
-                containerEl.appendChild(messageEl);
-                
-                // Stagger animations
-                setTimeout(() => {
-                    messageEl.style.opacity = '1';
-                    messageEl.style.transform = 'translateY(0)';
-                }, index * 100);
-            });
-        }
-    }
-    
-    function createMessageElement(message) {
-        const messageEl = document.createElement('div');
-        messageEl.className = 'message-card';
-        messageEl.style.opacity = '0';
-        messageEl.style.transform = 'translateY(20px)';
-        messageEl.style.transition = 'all 0.5s ease-out';
-        
-        const timeAgo = getTimeAgo(new Date(message.timestamp));
-        
-        messageEl.innerHTML = `
-            <div class="message-content">
-                <div class="message-text">"${escapeHtml(message.message)}"</div>
-                <div class="message-author">
-                    <span class="author-name">${escapeHtml(message.name)}</span>
-                    <span class="message-time">${timeAgo}</span>
-                </div>
-            </div>
-            <div class="message-heart">💕</div>
-        `;
-        
-        return messageEl;
-    }
-    
-    function getTimeAgo(date) {
-        const now = new Date();
-        const diff = now - date;
-        const minutes = Math.floor(diff / 60000);
-        const hours = Math.floor(diff / 3600000);
-        const days = Math.floor(diff / 86400000);
-        
-        if (days > 0) {
-            return `${days} ngày trước`;
-        } else if (hours > 0) {
-            return `${hours} giờ trước`;
-        } else if (minutes > 0) {
-            return `${minutes} phút trước`;
-        } else {
-            return 'Vừa xong';
-        }
-    }
-    
-    function escapeHtml(text) {
-        const div = document.createElement('div');
-        div.textContent = text;
-        return div.innerHTML;
-    }
-    
-    function showLoadingState() {
-        const loadingEl = document.querySelector('.message-loading');
-        const containerEl = document.getElementById('messagesContainer');
-        const noMessagesEl = document.getElementById('noMessages');
-        
-        if (loadingEl) loadingEl.style.display = 'flex';
-        if (containerEl) containerEl.style.display = 'none';
-        if (noMessagesEl) noMessagesEl.style.display = 'none';
-    }
-    
-    function showNewMessageNotification() {
-        // Remove existing notification
-        const existing = document.querySelector('.new-message-notification');
-        if (existing) {
-            existing.remove();
-        }
-        
-        const notification = document.createElement('div');
-        notification.className = 'new-message-notification';
-        notification.innerHTML = `
-            <div style="display: flex; align-items: center; gap: 10px;">
-                <span style="font-size: 20px;">💌</span>
-                <div>
-                    <div style="font-weight: 600;">Lời chúc mới!</div>
-                    <div style="font-size: 12px; opacity: 0.9;">Click để xem</div>
-                </div>
-            </div>
-        `;
-        
-        notification.addEventListener('click', () => {
-            const messageWallSection = document.querySelector('.message-wall-section');
-            if (messageWallSection) {
-                messageWallSection.scrollIntoView({ behavior: 'smooth' });
-            }
-            notification.remove();
-        });
-        
-        document.body.appendChild(notification);
-        
-        // Auto remove after 5 seconds
-        setTimeout(() => {
-            if (notification.parentNode) {
-                notification.remove();
-            }
-        }, 5000);
-    }
-    
-    // Cleanup function
-    function cleanupMessageWall() {
-        if (messageWallData.updateInterval) {
-            clearInterval(messageWallData.updateInterval);
-            messageWallData.updateInterval = null;
-        }
-    }
-    
-    // Listen for page unload to cleanup
-    window.addEventListener('beforeunload', cleanupMessageWall);
-
     // QR Code System
     function initQRCode() {
         const currentUrl = window.location.href;
         
-        console.log('🔗 QR Code URL:', currentUrl);
-        
-        // Simple QR code generation using current URL
+        // Simple QR code generation using CSS and a service
         const qrContainer = document.getElementById('qrcode');
         if (qrContainer) {
-            // Use a simple QR service with better error correction
+            // Use a simple QR service
             qrContainer.innerHTML = `
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&ecc=M&data=${encodeURIComponent(currentUrl)}" 
-                     alt="Wedding Invitation QR Code" 
-                     style="width: 180px; height: 180px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);"
-                     loading="lazy">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(currentUrl)}" 
+                     alt="QR Code" 
+                     style="width: 180px; height: 180px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
             `;
         }
         
@@ -1497,9 +1152,6 @@ document.addEventListener('DOMContentLoaded', function() {
         initQRCode();
         initTouchOptimizations();
         enableAutoplayOnInteraction();
-        
-        // Initialize RSVP dashboard for admin
-        createRSVPDashboard();
         
         // Advanced autoplay attempts
         tryImmediateAutoplay();
